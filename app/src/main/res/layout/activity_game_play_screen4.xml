@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:padding="@dimen/_20sdp"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.GamePlayScreen_4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn hình phạt"
+            android:textAlignment="center"
+            android:textColor="@color/hardBlue"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_30sdp"
+            android:id="@+id/gamePlayScreen_4_spHinhPhat"/>
+
+        <Button
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="Hoàn thành"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/pink"
+            android:id="@+id/gamePlayScreen_4_btnHoanThanh"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</RelativeLayout>

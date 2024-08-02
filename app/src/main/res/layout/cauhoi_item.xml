@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_20sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_20sdp"
+        android:background="@drawable/bogoc_tongquat"
+        android:id="@+id/cauHoi_layoutPhanLoai">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20ssp"
+            android:text="Sự thật"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:id="@+id/cauHoi_tvPhanLoai"
+            android:layout_toStartOf="@id/cauHoi_btnAnHien"
+            android:layout_marginEnd="@dimen/_25sdp"/>
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/triangle_up_svgrepo_com"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/cauHoi_btnAnHien"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bogoc_chitiet"
+        android:id="@+id/cauHoi_layoutMoRong"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:padding="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:textSize="@dimen/_18ssp"
+            android:textColor="@color/black"
+            android:text="ABC"
+            android:textStyle="bold"
+            android:id="@+id/cauHoi_tvNoiDung"/>
+
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/pen_solid"
+            android:id="@+id/cauHoi_btnSua"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_below="@id/cauHoi_tvNoiDung"
+            android:layout_toStartOf="@id/cauHoi_btnXoa" />
+
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/trash_solid"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/cauHoi_btnXoa"
+            android:layout_below="@id/cauHoi_tvNoiDung"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

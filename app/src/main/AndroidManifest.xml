@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TruthOrDareCustom"
+        tools:targetApi="31">
+        <activity
+            android:name=".screen.HistoryScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.GamePlayScreen_4"
+            android:exported="false" />
+        <activity
+            android:name=".screen.GamePlayScreen_3"
+            android:exported="false" />
+        <activity
+            android:name=".screen.GamePlayScreen_2"
+            android:exported="false" />
+        <activity
+            android:name=".screen.GamePlayScreen_1"
+            android:exported="false" />
+        <activity
+            android:name=".screen.SetupScreen_2"
+            android:exported="false" />
+        <activity
+            android:name=".screen.SetupScreen_1"
+            android:exported="false" />
+        <activity
+            android:name=".screen.QuestionsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.QuestionGroupsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.FoundersScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.RulesScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.HomeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.AttentionScreen"
+            android:exported="false" />
+        <activity
+            android:name=".screen.FirstScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

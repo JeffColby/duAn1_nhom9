@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_20sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_20sdp"
+        android:background="@drawable/bogoc_tongquat">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:textSize="@dimen/_20ssp"
+            android:text="Gia đình"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:id="@+id/boCauHoi_tvTenBoCauHoi"
+            android:layout_toStartOf="@id/boCauHoi_btnAnHien"
+            android:layout_marginEnd="@dimen/_25sdp"/>
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/triangle_up_svgrepo_com"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/boCauHoi_btnAnHien"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bogoc_chitiet"
+        android:visibility="gone"
+        android:id="@+id/boCauHoi_layoutMoRong"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:padding="@dimen/_20sdp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/buttons"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/pen_solid"
+                android:id="@+id/boCauHoi_btnSua"/>
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/trash_solid"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:id="@+id/boCauHoi_btnXoa"/>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toStartOf="@id/buttons"
+            android:layout_marginEnd="@dimen/_15sdp">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_18ssp"
+                android:text="Số câu hỏi"
+                android:id="@+id/boCauHoi_tvSoCauHoi"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_15ssp"
+                android:id="@+id/boCauHoi_btnChiTiet"
+                android:textColor="@color/hardBlue"
+                android:layout_marginTop="@dimen/_10sdp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

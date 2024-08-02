@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_20sdp"
+    android:background="@drawable/background"
+    tools:context=".screen.SetupScreen_1">
+
+    <Button
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Thoát"
+        android:id="@+id/setUpScreen1_btnThoat"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"/>
+
+    <Button
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        android:text="Tiếp theo"
+        android:id="@+id/setUpScreen1_btnTieptheo"
+        android:layout_above="@id/setUpScreen1_btnThoat"
+        android:backgroundTint="@color/pink"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15ssp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/yLine"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/bogoc_suthat"
+        android:layout_toStartOf="@id/yLine"
+        android:layout_marginEnd="@dimen/_10sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/_30sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15ssp"
+            android:text="Chọn bộ câu hỏi"
+            android:textColor="@color/hardBlue"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginBottom="@dimen/_15sdp"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/setUpScreen1_spBoCauHoi"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="@dimen/_20sdp"
+    tools:context=".screen.HomeScreen">
+
+    <ImageView
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:id="@+id/homeScreen_btnMenu"
+        android:src="@drawable/bars_s_svgrepo_com"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        
+        <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"/>
+        
+        <Button
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="Bắt đầu chơi"
+            android:textColor="@color/white"
+            android:id="@+id/homeScreen_btnBatDauChoi"
+            android:backgroundTint="@color/pink"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+        <Button
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="Xem bộ câu hỏi"
+            android:id="@+id/homeScreen_btnBoCauHoi"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/pink"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+        <Button
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="Tìm hiểu luật chơi"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/pink"
+            android:id="@+id/homeScreen_btnLuatChoi"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"/>
+    </LinearLayout>
+</RelativeLayout>

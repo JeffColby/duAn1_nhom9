@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_20sdp"
+    android:background="@drawable/background"
+    tools:context=".screen.SetupScreen_2">
+
+    <Button
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:text="Bắt đầu"
+        android:backgroundTint="@color/pink"
+        android:id="@+id/setUpScreen2_btnBatDau"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15ssp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/yLine"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/bogoc_suthat"
+        android:layout_toStartOf="@id/yLine"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:id="@+id/setUpScreen2_btnTroLai"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/bogoc_suthat"
+        android:layout_toEndOf="@id/yLine"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_10sdp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/setUpScreen2_btnTroLai"
+        android:layout_above="@id/setUpScreen2_btnBatDau"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Danh sách người chơi"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/hardBlue"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm"
+                android:backgroundTint="@color/hardBlue"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:id="@+id/setUpScreen2_btnThem"
+                android:layout_alignParentEnd="true"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_15ssp"
+                android:hint="Nhập tên người chơi"
+                android:maxLines="1"
+                android:id="@+id/setUpScreen2_edTenNguoiChoi"
+                android:textColor="@color/hardBlue"
+                android:textColorHint="@color/hardBlue"
+                android:layout_toStartOf="@id/setUpScreen2_btnThem"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/setUpScreen2_rcNguoiChoi"/>
+    </LinearLayout>
+</RelativeLayout>

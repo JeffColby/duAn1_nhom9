@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:padding="@dimen/_20sdp"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.GamePlayScreen_1">
+
+    <ImageView
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/xmark_solid"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/gamePlayScreen_1_btnThoat"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15ssp"
+            android:text="Người ấy là ai?"
+            android:textColor="@color/hardBlue"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginBottom="@dimen/_30sdp"/>
+
+        <Button
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="Bắt đầu"
+            android:textColor="@color/white"
+            android:id="@+id/gamePlayScreen_1_btnBatDau"
+            android:backgroundTint="@color/pink"
+            android:textSize="@dimen/_15ssp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</RelativeLayout>
