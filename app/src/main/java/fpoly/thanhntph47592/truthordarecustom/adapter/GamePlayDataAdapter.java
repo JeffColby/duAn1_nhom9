@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import fpoly.thanhntph47592.truthordarecustom.R;
 import fpoly.thanhntph47592.truthordarecustom.features.HistoryFeatures;
-import fpoly.thanhntph47592.truthordarecustom.model.LichSu;
+import fpoly.thanhntph47592.truthordarecustom.model.GamePlayData;
 
-public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHolder>{
+public class GamePlayDataAdapter extends RecyclerView.Adapter<GamePlayDataAdapter.LichSuHolder>{
 
     private Context context;
-    private ArrayList<LichSu> arrayList;
+    private ArrayList<GamePlayData> arrayList;
     private HistoryFeatures historyFeatures;
 
-    public LichSuAdapter(Context context, ArrayList<LichSu> arrayList) {
+    public GamePlayDataAdapter(Context context, ArrayList<GamePlayData> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
         historyFeatures=new HistoryFeatures(context);
@@ -28,26 +28,25 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
     @NonNull
     @Override
     public LichSuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.bocauhoi_item,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.question_group_item,parent,false);
         return new LichSuHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LichSuHolder holder, int position) {
-        LichSu lichSu =arrayList.get(position);
+        GamePlayData gamePlayData =arrayList.get(position);
 
-        holder.btnAnHien.setVisibility(View.GONE);
-        holder.tvNgayGio.setText(lichSu.getNgayGio());
+        holder.tvTime.setText(gamePlayData.getTime());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                historyFeatures.xemLichSu(lichSu);
+                historyFeatures.showGamePlayData(gamePlayData);
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                historyFeatures.xoaLichSu(lichSu,arrayList,LichSuAdapter.this);
+                historyFeatures.deleteGamePlayData(gamePlayData,arrayList, GamePlayDataAdapter.this);
                 return true;
             }
         });
@@ -60,13 +59,15 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
 
     public static class LichSuHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvNgayGio;
-        private ImageView btnAnHien;
+        private TextView tvTime;
+        private ImageView btnExtend;
 
         public LichSuHolder(@NonNull View itemView) {
             super(itemView);
-            tvNgayGio=itemView.findViewById(R.id.boCauHoi_tvTenBoCauHoi);
-            btnAnHien=itemView.findViewById(R.id.boCauHoi_btnAnHien);
+            tvTime =itemView.findViewById(R.id.questionGroup_tvName);
+            btnExtend =itemView.findViewById(R.id.questionGroup_btnExtend);
+
+            btnExtend.setVisibility(View.GONE);
         }
     }
 }

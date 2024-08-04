@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Thoát"
-        android:id="@+id/setUpScreen1_btnThoat"
+        android:id="@+id/setUpScreen1_btnExit"
         android:backgroundTint="@color/white"
         android:textColor="@color/black"
         android:textSize="@dimen/_15ssp"/>
@@ -26,8 +26,8 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_centerHorizontal="true"
         android:text="Tiếp theo"
-        android:id="@+id/setUpScreen1_btnTieptheo"
-        android:layout_above="@id/setUpScreen1_btnThoat"
+        android:id="@+id/setUpScreen1_btnNext"
+        android:layout_above="@id/setUpScreen1_btnExit"
         android:backgroundTint="@color/pink"
         android:textColor="@color/white"
         android:textSize="@dimen/_15ssp"/>
@@ -41,7 +41,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp"
-        android:background="@drawable/bogoc_suthat"
+        android:background="@drawable/corner_radius_truth"
         android:layout_toStartOf="@id/yLine"
         android:layout_marginEnd="@dimen/_10sdp"/>
 
@@ -64,7 +64,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/setUpScreen1_spBoCauHoi"/>
+            android:id="@+id/setUpScreen1_spQuesionGroup"/>
     </LinearLayout>
 
 </RelativeLayout>

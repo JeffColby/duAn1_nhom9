@@ -13,9 +13,9 @@ import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 public class RulesScreen extends AppCompatActivity {
 
     private BasicFeatures basicFeatures;
-    private TextView tvNoiDung;
-    private ImageView btnTroVe;
-    private Button btnBatDau;
+    TextView tvContent;
+    ImageView btnBack;
+    Button btnStartPlaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,11 @@ public class RulesScreen extends AppCompatActivity {
 
         basicFeatures=new BasicFeatures(RulesScreen.this);
 
-        tvNoiDung=findViewById(R.id.rulesScreen_tvNoiDung);
-        btnTroVe=findViewById(R.id.rulesScreen_btnTroVe);
-        btnBatDau=findViewById(R.id.rulesScreen_btnBatDau);
+        tvContent =findViewById(R.id.rulesScreen_tvContent);
+        btnBack =findViewById(R.id.rulesScreen_btnBack);
+        btnStartPlaying =findViewById(R.id.rulesScreen_btnStartPlaying);
 
-        String noiDung="Bước 1. Chọn bộ câu hỏi đã thêm ở danh sách\n\n" +
+        String content ="Bước 1. Chọn bộ câu hỏi đã thêm ở danh sách\n\n" +
                 "Bước 2. Thêm người chơi (yêu cầu tối thiểu 2 người)\n\n" +
                 "Bước 3. Bắt đầu lượt chơi. Chọn ngẫu nhiên 1 người chơi để trả lời câu hỏi\n\n" +
                 "Bước 4. Sẽ có 2 lựa chọn cho người chơi: Sự thật hoặc Thách thức \n\n" +
@@ -40,19 +40,19 @@ public class RulesScreen extends AppCompatActivity {
                 "tinh thần người khác; không phù hợp với thuần phong mỹ tục hoặc " +
                 "hành vi vi phạm pháp luật Việt Nam. " +
                 "Chúc các bạn có những giây phút vui vẻ và ý nghĩa cùng ứng dụng!";
-        tvNoiDung.setText(noiDung);
-        tvNoiDung.setMovementMethod(new ScrollingMovementMethod());
+        tvContent.setText(content);
+        tvContent.setMovementMethod(new ScrollingMovementMethod());
 
-        btnTroVe.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicFeatures.chuyenMan(HomeScreen.class);
+                basicFeatures.nextScreen(HomeScreen.class);
             }
         });
-        btnBatDau.setOnClickListener(new View.OnClickListener() {
+        btnStartPlaying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicFeatures.chuyenMan(SetupScreen_1.class);
+                basicFeatures.nextScreen(SetupScreen_1.class);
             }
         });
     }

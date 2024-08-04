@@ -12,22 +12,22 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE BOCAUHOI(" +
-                "MABOCAUHOI INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "TENBOCAUHOI TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE QUESTIONGROUP(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NAME TEXT NOT NULL)");
 
-        db.execSQL("CREATE TABLE CAUHOI(" +
-                "MACAUHOI INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "NOIDUNG TEXT NOT NULL," +
-                "PHANLOAI INTEGER NOT NULL," +
-                "BOCAUHOI INTEGER REFERENCES BOCAUHOI(MABOCAUHOI))");
+        db.execSQL("CREATE TABLE QUESTION(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "CONTENT TEXT NOT NULL," +
+                "TYPE INTEGER NOT NULL," +
+                "QUESTIONGROUP INTEGER REFERENCES QUESTIONGROUP(ID))");
 
-        db.execSQL("CREATE TABLE VANCHOI(" +
-                "MAVANCHOI INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "NGAYGIO TEXT NOT NULL," +
-                "SONGUOICHOI INTEGER NOT NULL," +
-                "TENNGUOICHOI TEXT NOT NULL," +
-                "CAUHOI TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE GAMEPLAYDATA(" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "TIME TEXT NOT NULL," +
+                "NUMPLAYER INTEGER NOT NULL," +
+                "PLAYERNAME TEXT NOT NULL," +
+                "QUESTION TEXT NOT NULL)");
     }
 
     @Override

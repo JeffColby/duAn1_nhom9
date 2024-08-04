@@ -15,7 +15,7 @@
         android:textSize="@dimen/_17ssp"
         android:layout_margin="@dimen/_15sdp"
         android:textColor="@color/hardBlue"
-        android:id="@+id/gamePlayScreen_3_tvTenNguoiChoi"/>
+        android:id="@+id/gamePlayScreen_3_tvPlayerName"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -25,9 +25,9 @@
         android:textSize="@dimen/_20ssp"
         android:textColor="@color/hardBlue"
         android:textStyle="bold"
-        android:layout_below="@id/gamePlayScreen_3_tvTenNguoiChoi"
-        android:layout_above="@id/gamePlayScreen_3_btnHoanThanh"
-        android:id="@+id/gamePlayScreen_3_tvNoiDungCauHoi"/>
+        android:layout_below="@id/gamePlayScreen_3_tvPlayerName"
+        android:layout_above="@id/gamePlayScreen_3_btnComplete"
+        android:id="@+id/gamePlayScreen_3_tvQuestion"/>
 
     <Button
         android:layout_width="@dimen/_170sdp"
@@ -37,7 +37,7 @@
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/white"
         android:layout_centerInParent="true"
-        android:id="@+id/gamePlayScreen_3_btnHoanThanh"/>
+        android:id="@+id/gamePlayScreen_3_btnComplete"/>
 
     <Button
         android:layout_width="@dimen/_170sdp"
@@ -48,8 +48,8 @@
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/white"
         android:layout_centerInParent="true"
-        android:id="@+id/gamePlayScreen_3_btnTrungCauHoi"
-        android:layout_below="@id/gamePlayScreen_3_btnHoanThanh"/>
+        android:id="@+id/gamePlayScreen_3_btnCoinsident"
+        android:layout_below="@id/gamePlayScreen_3_btnComplete"/>
 
     <Button
         android:layout_width="@dimen/_170sdp"
@@ -60,6 +60,6 @@
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/white"
         android:layout_centerInParent="true"
-        android:id="@+id/gamePlayScreen_3_btnChiuThua"
-        android:layout_below="@id/gamePlayScreen_3_btnTrungCauHoi"/>
+        android:id="@+id/gamePlayScreen_3_btnSurrender"
+        android:layout_below="@id/gamePlayScreen_3_btnCoinsident"/>
 </RelativeLayout>

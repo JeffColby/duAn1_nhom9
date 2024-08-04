@@ -14,7 +14,7 @@
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/xmark_solid"
         android:layout_alignParentEnd="true"
-        android:id="@+id/gamePlayScreen_1_btnThoat"/>
+        android:id="@+id/gamePlayScreen_1_btnExit"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_height="@dimen/_50sdp"
             android:text="Bắt đầu"
             android:textColor="@color/white"
-            android:id="@+id/gamePlayScreen_1_btnBatDau"
+            android:id="@+id/gamePlayScreen_1_btnStart"
             android:backgroundTint="@color/pink"
             android:textSize="@dimen/_15ssp"
             android:layout_gravity="center"/>

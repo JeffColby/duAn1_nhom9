@@ -13,8 +13,8 @@ import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 public class HomeScreen extends AppCompatActivity {
 
     private static Context context;
-    private Button btnLuatChoi, btnBoCauHoi, btnBatDauChoi;
-    private ImageView btnMenu;
+    Button btnHowToPlay, btnViewQuestionGroup, btnStartPlaying;
+    ImageView btnMenu;
 
     public static Context getContext() {
         return context;
@@ -28,23 +28,23 @@ public class HomeScreen extends AppCompatActivity {
 
         BasicFeatures basicFeatures=new BasicFeatures(HomeScreen.this);
 
-        btnLuatChoi=findViewById(R.id.homeScreen_btnLuatChoi);
-        btnBoCauHoi=findViewById(R.id.homeScreen_btnBoCauHoi);
-        btnBatDauChoi=findViewById(R.id.homeScreen_btnBatDauChoi);
+        btnHowToPlay =findViewById(R.id.homeScreen_btnHowToPlay);
+        btnViewQuestionGroup =findViewById(R.id.homeScreen_btnViewQuestionGroup);
+        btnStartPlaying =findViewById(R.id.homeScreen_btnStartPlaying);
         btnMenu=findViewById(R.id.homeScreen_btnMenu);
 
-        PopupMenu popupMenu=basicFeatures.caiDatMenu(btnMenu);
+        PopupMenu popupMenu=basicFeatures.menuSetUp(btnMenu);
 
-        btnBoCauHoi.setOnClickListener(new View.OnClickListener() {
+        btnViewQuestionGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicFeatures.chuyenMan(QuestionGroupsScreen.class);
+                basicFeatures.nextScreen(QuestionGroupsScreen.class);
             }
         });
-        btnLuatChoi.setOnClickListener(new View.OnClickListener() {
+        btnHowToPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicFeatures.chuyenMan(RulesScreen.class);
+                basicFeatures.nextScreen(RulesScreen.class);
             }
         });
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -53,10 +53,10 @@ public class HomeScreen extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-        btnBatDauChoi.setOnClickListener(new View.OnClickListener() {
+        btnStartPlaying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicFeatures.chuyenMan(SetupScreen_1.class);
+                basicFeatures.nextScreen(SetupScreen_1.class);
             }
         });
     }

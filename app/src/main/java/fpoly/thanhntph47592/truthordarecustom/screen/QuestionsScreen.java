@@ -13,26 +13,26 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.CauHoiAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.BoCauHoiDAO;
+import fpoly.thanhntph47592.truthordarecustom.adapter.QuestionAdapter;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
 import fpoly.thanhntph47592.truthordarecustom.features.QuestionGroupsFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.QuestionsFeatures;
-import fpoly.thanhntph47592.truthordarecustom.model.BoCauHoi;
+import fpoly.thanhntph47592.truthordarecustom.model.QuestionGroup;
 
 public class QuestionsScreen extends AppCompatActivity {
 
     private static Context context;
-    private BasicFeatures basicFeatures;
-    private QuestionsFeatures questionsFeatures;
-    private QuestionGroupsFeatures questionGroupsFeatures;
-    private BoCauHoiDAO boCauHoiDAO;
-    private CauHoiAdapter cauHoiAdapter;
-    private ImageView btnMenu, btnThem;
-    private Spinner spBoCauHoi;
-    private RecyclerView rcCauHoi;
-    private LinearLayout btnSuThat,btnThachThuc,btnHinhPhat;
-    int viTri=-1;
+    BasicFeatures basicFeatures;
+    QuestionsFeatures questionsFeatures;
+    QuestionGroupsFeatures questionGroupsFeatures;
+    QuestionGroupDAO questionGroupDAO;
+    QuestionAdapter questionAdapter;
+    ImageView btnMenu, btnAdd;
+    Spinner spQuestionGroup;
+    RecyclerView rcQuestion;
+    LinearLayout btnTruth, btnDare, btnPunish;
+    int position =-1;
 
     public static Context getContext() {
         return context;
@@ -47,33 +47,33 @@ public class QuestionsScreen extends AppCompatActivity {
         basicFeatures=new BasicFeatures(QuestionsScreen.this);
         questionsFeatures=new QuestionsFeatures(QuestionsScreen.this);
         questionGroupsFeatures=new QuestionGroupsFeatures(QuestionsScreen.this);
-        boCauHoiDAO=new BoCauHoiDAO(QuestionsScreen.this);
-        cauHoiAdapter=new CauHoiAdapter(QuestionsScreen.this,null);
+        questionGroupDAO =new QuestionGroupDAO(QuestionsScreen.this);
+        questionAdapter =new QuestionAdapter(QuestionsScreen.this,null);
 
         btnMenu=findViewById(R.id.questionsScreen_btnMenu);
-        btnThem=findViewById(R.id.questionsScreen_btnThem);
-        spBoCauHoi=findViewById(R.id.questionsScreen_spBoCauHoi);
-        rcCauHoi=findViewById(R.id.questionsScreen_rcCauHoi);
-        btnSuThat=findViewById(R.id.questionsScreen_btnSuThat);
-        btnThachThuc=findViewById(R.id.questionsScreen_btnThachThuc);
-        btnHinhPhat=findViewById(R.id.questionsScreen_btnHinhPhat);
+        btnAdd =findViewById(R.id.questionsScreen_btnAdd);
+        spQuestionGroup =findViewById(R.id.questionsScreen_spQuestionGroup);
+        rcQuestion =findViewById(R.id.questionsScreen_rcQuestion);
+        btnTruth =findViewById(R.id.questionsScreen_btnTruth);
+        btnDare =findViewById(R.id.questionsScreen_btnDare);
+        btnPunish =findViewById(R.id.questionsScreen_btnPunish);
 
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        if (boCauHoiArrayList.isEmpty()){
-            questionGroupsFeatures.kiemTraBoCauHoi();
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        if (questionGroupArrayList.isEmpty()){
+            questionGroupsFeatures.checkQuestionGroup();
         }else {
-            PopupMenu popupMenu=basicFeatures.caiDatMenu(btnMenu);
-            basicFeatures.caiDatRecycleView(rcCauHoi);
-            questionsFeatures.caiDatSpinnerBoCauHoi(spBoCauHoi);
+            PopupMenu popupMenu=basicFeatures.menuSetUp(btnMenu);
+            basicFeatures.recycleViewSetUp(rcQuestion);
+            questionsFeatures.questionGroupSpinnerSetUp(spQuestionGroup);
 
-            viTri=spBoCauHoi.getSelectedItemPosition();
+            position = spQuestionGroup.getSelectedItemPosition();
             Intent intent=getIntent();
             Bundle bundle=intent.getExtras();
             if (bundle!=null){
-                viTri=bundle.getInt("ViTri");
+                position =bundle.getInt("ViTri");
             }
-            spBoCauHoi.setSelection(viTri);
-            questionsFeatures.locCauHoiTheoBo(viTri,cauHoiAdapter,rcCauHoi);
+            spQuestionGroup.setSelection(position);
+            questionsFeatures.filterByGroup(position, questionAdapter, rcQuestion);
 
             btnMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,38 +81,38 @@ public class QuestionsScreen extends AppCompatActivity {
                     popupMenu.show();
                 }
             });
-            btnThem.setOnClickListener(new View.OnClickListener() {
+            btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    questionsFeatures.themCauHoi(viTri,cauHoiAdapter,rcCauHoi);
+                    questionsFeatures.addQuestion(position, questionAdapter, rcQuestion);
                 }
             });
-            btnSuThat.setOnClickListener(new View.OnClickListener() {
+            btnTruth.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    questionsFeatures.locCauHoiTheoPhanLoai(viTri,0,cauHoiAdapter.getArrayList(),
-                            cauHoiAdapter,rcCauHoi);
+                    questionsFeatures.filterByType(position,0, questionAdapter.getArrayList(),
+                            questionAdapter, rcQuestion);
                 }
             });
-            btnThachThuc.setOnClickListener(new View.OnClickListener() {
+            btnDare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    questionsFeatures.locCauHoiTheoPhanLoai(viTri,1,cauHoiAdapter.getArrayList(),
-                            cauHoiAdapter,rcCauHoi);
+                    questionsFeatures.filterByType(position,1, questionAdapter.getArrayList(),
+                            questionAdapter, rcQuestion);
                 }
             });
-            btnHinhPhat.setOnClickListener(new View.OnClickListener() {
+            btnPunish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    questionsFeatures.locCauHoiTheoPhanLoai(viTri,2,cauHoiAdapter.getArrayList(),
-                            cauHoiAdapter,rcCauHoi);
+                    questionsFeatures.filterByType(position,2, questionAdapter.getArrayList(),
+                            questionAdapter, rcQuestion);
                 }
             });
-            spBoCauHoi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spQuestionGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    viTri=position;
-                    questionsFeatures.locCauHoiTheoBo(viTri,cauHoiAdapter,rcCauHoi);
+                    QuestionsScreen.this.position =position;
+                    questionsFeatures.filterByGroup(QuestionsScreen.this.position, questionAdapter, rcQuestion);
                 }
 
                 @Override

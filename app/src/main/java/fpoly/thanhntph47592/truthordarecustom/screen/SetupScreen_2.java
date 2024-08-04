@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.NguoiChoiAdapter;
+import fpoly.thanhntph47592.truthordarecustom.adapter.PlayerAdapter;
 import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.GamePlayFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.HistoryFeatures;
@@ -20,11 +20,11 @@ public class SetupScreen_2 extends AppCompatActivity {
     private BasicFeatures basicFeatures;
     private GamePlayFeatures gamePlayFeatures;
     private HistoryFeatures historyFeatures;
-    private LinearLayout btnTroLai;
-    private Button btnThem,btnBatDau;
-    private EditText edTenNguoiChoi;
-    private NguoiChoiAdapter adapter;
-    private RecyclerView rcNguoiChoi;
+    LinearLayout btnBack;
+    Button btnAdd, btnStart;
+    EditText edPlayerName;
+    PlayerAdapter adapter;
+    RecyclerView rcPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,38 +35,38 @@ public class SetupScreen_2 extends AppCompatActivity {
         gamePlayFeatures=new GamePlayFeatures(SetupScreen_2.this);
         historyFeatures=new HistoryFeatures(SetupScreen_2.this);
 
-        edTenNguoiChoi=findViewById(R.id.setUpScreen2_edTenNguoiChoi);
-        btnTroLai=findViewById(R.id.setUpScreen2_btnTroLai);
-        btnThem=findViewById(R.id.setUpScreen2_btnThem);
-        btnBatDau=findViewById(R.id.setUpScreen2_btnBatDau);
-        rcNguoiChoi=findViewById(R.id.setUpScreen2_rcNguoiChoi);
+        edPlayerName =findViewById(R.id.setUpScreen2_edPlayerName);
+        btnBack =findViewById(R.id.setUpScreen2_btnBack);
+        btnAdd =findViewById(R.id.setUpScreen2_btnAdd);
+        btnStart =findViewById(R.id.setUpScreen2_btnStart);
+        rcPlayer =findViewById(R.id.setUpScreen2_rcPlayer);
 
         ArrayList<String> arrayList=new ArrayList<>();
-        adapter=new NguoiChoiAdapter(SetupScreen_2.this,arrayList);
-        rcNguoiChoi.setAdapter(adapter);
-        basicFeatures.caiDatRecycleView(rcNguoiChoi);
+        adapter=new PlayerAdapter(SetupScreen_2.this,arrayList);
+        rcPlayer.setAdapter(adapter);
+        basicFeatures.recycleViewSetUp(rcPlayer);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-        int viTri=bundle.getInt("ViTri");
+        int position =bundle.getInt("ViTri");
 
-        btnTroLai.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicFeatures.chuyenMan(SetupScreen_1.class);
+                basicFeatures.nextScreen(SetupScreen_1.class);
             }
         });
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.themNguoiChoi(edTenNguoiChoi,arrayList,adapter);
+                gamePlayFeatures.addPlayer(edPlayerName,arrayList,adapter);
             }
         });
-        btnBatDau.setOnClickListener(new View.OnClickListener() {
+        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.batDauChoi(viTri,arrayList, GamePlayScreen_1.class);
+                gamePlayFeatures.startPlaying(position,arrayList, GamePlayScreen_1.class);
                 if (adapter.getArrayList().size()>=2){
-                    historyFeatures.themVaoLichSu(adapter.getArrayList(),viTri);
+                    historyFeatures.addGamePlayData(adapter.getArrayList(), position);
                 }
             }
         });

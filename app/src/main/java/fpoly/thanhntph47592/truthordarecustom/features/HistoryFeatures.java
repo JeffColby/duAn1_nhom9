@@ -11,63 +11,63 @@ import android.widget.Toast;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.LichSuAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.BoCauHoiDAO;
-import fpoly.thanhntph47592.truthordarecustom.dao.CauHoiDAO;
-import fpoly.thanhntph47592.truthordarecustom.dao.LichSuDAO;
-import fpoly.thanhntph47592.truthordarecustom.model.BoCauHoi;
-import fpoly.thanhntph47592.truthordarecustom.model.CauHoi;
-import fpoly.thanhntph47592.truthordarecustom.model.LichSu;
+import fpoly.thanhntph47592.truthordarecustom.adapter.GamePlayDataAdapter;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionDAO;
+import fpoly.thanhntph47592.truthordarecustom.dao.GamePlayDataDAO;
+import fpoly.thanhntph47592.truthordarecustom.model.QuestionGroup;
+import fpoly.thanhntph47592.truthordarecustom.model.Question;
+import fpoly.thanhntph47592.truthordarecustom.model.GamePlayData;
 
 public class HistoryFeatures {
 
     private Context context;
-    private LichSuDAO lichSuDAO;
-    private BoCauHoiDAO boCauHoiDAO;
-    private CauHoiDAO cauHoiDAO;
+    private GamePlayDataDAO gamePlayDataDAO;
+    private QuestionGroupDAO questionGroupDAO;
+    private QuestionDAO questionDAO;
 
     public HistoryFeatures(Context context) {
         this.context=context;
-        lichSuDAO =new LichSuDAO(context);
-        boCauHoiDAO=new BoCauHoiDAO(context);
-        cauHoiDAO=new CauHoiDAO(context);
+        gamePlayDataDAO =new GamePlayDataDAO(context);
+        questionGroupDAO =new QuestionGroupDAO(context);
+        questionDAO =new QuestionDAO(context);
     }
 
-    public void themVaoLichSu(ArrayList<String> nguoiChoi,int viTri){
-        LocalDateTime time=LocalDateTime.now();
-        String hour=time.getHour()+":";
-        String minutes=time.getMinute()+" ";
-        String day=time.getDayOfMonth()+"/";
-        String month=time.getMonthValue()+"/";
-        String year=time.getYear()+"";
-        String ngayGio=hour+minutes+day+month+year;
+    public void addGamePlayData(ArrayList<String> players,int position){
+        LocalDateTime localDateTime =LocalDateTime.now();
+        String hour= localDateTime.getHour()+":";
+        String minutes= localDateTime.getMinute()+" ";
+        String day= localDateTime.getDayOfMonth()+"/";
+        String month= localDateTime.getMonthValue()+"/";
+        String year= localDateTime.getYear()+"";
+        String time =hour+minutes+day+month+year;
 
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        int maBoCauHoi=boCauHoiArrayList.get(viTri).getMaBoCauHoi();
-        ArrayList<CauHoi> cauHoiArrayList=cauHoiDAO.cauHoiTheoBo(maBoCauHoi);
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        int questionGroup = questionGroupArrayList.get(position).getId();
+        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(questionGroup);
 
-        lichSuDAO.themVanChoi(ngayGio,nguoiChoi,cauHoiArrayList);
+        gamePlayDataDAO.addGamePlayData(time, players, questionArrayList);
     }
 
-    public void xemLichSu(LichSu vanChoi){
+    public void showGamePlayData(GamePlayData gamePlayData){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        View view= LayoutInflater.from(context).inflate(R.layout.lichsu_dialog,null);
+        View view= LayoutInflater.from(context).inflate(R.layout.gameplay_data_dialog,null);
         builder.setView(view);
         AlertDialog dialog=builder.create();
         dialog.show();
 
-        ImageView btnThoat=view.findViewById(R.id.lichSu_btnThoat);
-        TextView tvNgayGio=view.findViewById(R.id.lichSu_tvNgayGio);
-        TextView tvSoNguoiChoi=view.findViewById(R.id.lichSu_tvSoNguoiChoi);
-        TextView tvTenNguoiChoi=view.findViewById(R.id.lichSu_tvTenNguoiChoi);
-        TextView tvCauHoi=view.findViewById(R.id.lichSu_tvCauHoi);
+        ImageView btnExit =view.findViewById(R.id.gamePlayData_btnExit);
+        TextView tvTime =view.findViewById(R.id.gamePlayData_tvTime);
+        TextView tvNumPlayer =view.findViewById(R.id.gamePlayData_tvNumPlayer);
+        TextView tvPlayers =view.findViewById(R.id.gamePlayData_tvPlayers);
+        TextView tvQuestions =view.findViewById(R.id.gamePlayData_tvQuestions);
 
-        tvNgayGio.setText("Ngày giờ: "+vanChoi.getNgayGio());
-        tvSoNguoiChoi.setText("Số người chơi: "+(vanChoi.getSoNguoiChoi()));
-        tvTenNguoiChoi.setText(vanChoi.getTenNguoiChoi());
-        tvCauHoi.setText(vanChoi.getCauHoi());
+        tvTime.setText("Ngày giờ: "+ gamePlayData.getTime());
+        tvNumPlayer.setText("Số người chơi: "+(gamePlayData.getNumPlayer()));
+        tvPlayers.setText(gamePlayData.getPlayerName());
+        tvQuestions.setText(gamePlayData.getQuestion());
 
-        btnThoat.setOnClickListener(new View.OnClickListener() {
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -75,7 +75,7 @@ public class HistoryFeatures {
         });
     }
 
-    public void xoaLichSu(LichSu lichSu, ArrayList<LichSu> arrayList, LichSuAdapter adapter){
+    public void deleteGamePlayData(GamePlayData gamePlayData, ArrayList<GamePlayData> arrayList, GamePlayDataAdapter adapter){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setTitle("Xóa lịch sử chơi");
         builder.setMessage("Tất cả thông tin của ván chơi này sẽ bị xóa vĩnh viễn. Xác nhận tiếp tục xóa?");
@@ -88,9 +88,9 @@ public class HistoryFeatures {
         builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                boolean check=lichSuDAO.xoaVanChoi(lichSu);
+                boolean check= gamePlayDataDAO.deleteGamePlayData(gamePlayData);
                 if (check){
-                    arrayList.remove(lichSu);
+                    arrayList.remove(gamePlayData);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(context, "Xóa lịch sử thành công", Toast.LENGTH_SHORT).show();
                 }

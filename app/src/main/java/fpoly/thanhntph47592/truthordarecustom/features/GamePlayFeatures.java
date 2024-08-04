@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,12 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.NguoiChoiAdapter;
+import fpoly.thanhntph47592.truthordarecustom.adapter.PlayerAdapter;
 import fpoly.thanhntph47592.truthordarecustom.adapter.SpinnerAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.BoCauHoiDAO;
-import fpoly.thanhntph47592.truthordarecustom.dao.CauHoiDAO;
-import fpoly.thanhntph47592.truthordarecustom.model.BoCauHoi;
-import fpoly.thanhntph47592.truthordarecustom.model.CauHoi;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionDAO;
+import fpoly.thanhntph47592.truthordarecustom.model.QuestionGroup;
+import fpoly.thanhntph47592.truthordarecustom.model.Question;
 import fpoly.thanhntph47592.truthordarecustom.screen.GamePlayScreen_3;
 import fpoly.thanhntph47592.truthordarecustom.screen.GamePlayScreen_4;
 import fpoly.thanhntph47592.truthordarecustom.screen.HomeScreen;
@@ -30,30 +29,30 @@ import fpoly.thanhntph47592.truthordarecustom.screen.HomeScreen;
 public class GamePlayFeatures {
 
     private Context context;
-    private BoCauHoiDAO boCauHoiDAO;
-    private CauHoiDAO cauHoiDAO;
+    private QuestionGroupDAO questionGroupDAO;
+    private QuestionDAO questionDAO;
 
     public GamePlayFeatures(Context context) {
         this.context = context;
-        boCauHoiDAO=new BoCauHoiDAO(context);
-        cauHoiDAO=new CauHoiDAO(context);
+        questionGroupDAO =new QuestionGroupDAO(context);
+        questionDAO =new QuestionDAO(context);
     }
 
-    public void themNguoiChoi(EditText edTenNguoiChoi, ArrayList<String> arrayList, NguoiChoiAdapter adapter){
-        String tenNguoiChoi=edTenNguoiChoi.getText().toString();
-        if (tenNguoiChoi.isEmpty()){
+    public void addPlayer(EditText edPlayerName, ArrayList<String> arrayList, PlayerAdapter adapter){
+        String playerName = edPlayerName.getText().toString();
+        if (playerName.isEmpty()){
             Toast.makeText(context, "Người chơi không hợp lệ", Toast.LENGTH_SHORT).show();
         }else {
-            String tenDaCo="";
+            String existedPlayer ="";
             for (String ten:arrayList){
-                if (ten.equals(tenNguoiChoi)){
-                    tenDaCo=ten;
+                if (ten.equals(playerName)){
+                    existedPlayer =ten;
                     break;
                 }
             }
-            if (tenDaCo.equals("")){
-                arrayList.add(tenNguoiChoi);
-                edTenNguoiChoi.setText("");
+            if (existedPlayer.equals("")){
+                arrayList.add(playerName);
+                edPlayerName.setText("");
                 adapter.notifyDataSetChanged();
                 Toast.makeText(context, "Thêm người chơi thành công", Toast.LENGTH_SHORT).show();
             }else {
@@ -62,7 +61,7 @@ public class GamePlayFeatures {
         }
     }
 
-    public void xoaNguoiChoi(int viTri,ArrayList<String> arrayList,NguoiChoiAdapter adapter){
+    public void deletePlayer(int position, ArrayList<String> arrayList, PlayerAdapter adapter){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setMessage("Bạn muốn xóa người chơi này?");
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -74,7 +73,7 @@ public class GamePlayFeatures {
         builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                arrayList.remove(viTri);
+                arrayList.remove(position);
                 adapter.notifyDataSetChanged();
                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
             }
@@ -82,44 +81,44 @@ public class GamePlayFeatures {
         builder.show();
     }
 
-    public void suaNguoiChoi(int viTri,String tenNguoiChoi,ArrayList<String> arrayList,NguoiChoiAdapter adapter){
+    public void changePlayer(int position, String playerName, ArrayList<String> arrayList, PlayerAdapter adapter){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        View view= LayoutInflater.from(context).inflate(R.layout.bocauhoi_dialog,null);
+        View view= LayoutInflater.from(context).inflate(R.layout.question_group_dialog,null);
         builder.setView(view);
         AlertDialog dialog=builder.create();
         dialog.show();
 
-        TextView tvTieuDe=view.findViewById(R.id.boCauHoi_tvTieuDe);
-        EditText edTenNguoiChoi=view.findViewById(R.id.boCauHoi_edNoiDung);
-        Button btnLuu=view.findViewById(R.id.boCauHoi_btnDongY);
-        Button btnHuy=view.findViewById(R.id.boCauHoi_btnTuChoi);
-        tvTieuDe.setText("Thay đổi người chơi");
-        btnLuu.setText("Lưu");
-        edTenNguoiChoi.setHint("Nhập tên người chơi mới");
-        edTenNguoiChoi.setText(tenNguoiChoi);
+        TextView tvTittle =view.findViewById(R.id.questionGroupDialog_tvTittle);
+        EditText edPlayerName =view.findViewById(R.id.questionGroupDialog_edName);
+        Button btnSave =view.findViewById(R.id.questionGroupDialog_btnAdd);
+        Button btnCancel =view.findViewById(R.id.questionGroupDialog_btnCancel);
+        tvTittle.setText("Thay đổi người chơi");
+        btnSave.setText("Lưu");
+        edPlayerName.setHint("Nhập tên người chơi mới");
+        edPlayerName.setText(playerName);
 
-        btnHuy.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        btnLuu.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tenNguoiChoiMoi=edTenNguoiChoi.getText().toString();
-                if (tenNguoiChoiMoi.isEmpty()){
+                String newPlayerName = edPlayerName.getText().toString();
+                if (newPlayerName.isEmpty()){
                     Toast.makeText(context, "Người chơi không hợp lệ", Toast.LENGTH_SHORT).show();
                 }else {
-                    String tenDaCo="";
+                    String existedPlayer ="";
                     for (String ten:arrayList){
-                        if (ten.equals(tenNguoiChoiMoi)){
-                            tenDaCo=ten;
+                        if (ten.equals(newPlayerName)){
+                            existedPlayer =ten;
                             break;
                         }
                     }
-                    if (tenDaCo.equals("")){
-                        arrayList.set(viTri,tenNguoiChoiMoi);
+                    if (existedPlayer.equals("")){
+                        arrayList.set(position, newPlayerName);
                         dialog.dismiss();
                         adapter.notifyDataSetChanged();
                         Toast.makeText(context, "Thay đổi người chơi thành công", Toast.LENGTH_SHORT).show();
@@ -131,7 +130,7 @@ public class GamePlayFeatures {
         });
     }
 
-    public void thoatTroChoi(){
+    public void gamePlayExit(){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setTitle("Thoát trò chơi");
         builder.setMessage("Ván chơi sẽ được tính là kết thúc. Bạn xác nhận thoát?");
@@ -144,19 +143,19 @@ public class GamePlayFeatures {
         builder.setPositiveButton("Thoát", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new BasicFeatures(context).chuyenMan(HomeScreen.class);
+                new BasicFeatures(context).nextScreen(HomeScreen.class);
             }
         });
         builder.show();
     }
 
-    public void batDauChoi(int viTri,ArrayList<String> nguoiChoi,Class mClass){
+    public void startPlaying(int position, ArrayList<String> players, Class mClass){
         Intent intent=new Intent(context, mClass);
         Bundle bundle=new Bundle();
-        bundle.putInt("ViTri",viTri);
-        bundle.putStringArrayList("NguoiChoi",nguoiChoi);
+        bundle.putInt("ViTri", position);
+        bundle.putStringArrayList("NguoiChoi", players);
         intent.putExtras(bundle);
-        if (nguoiChoi!=null && nguoiChoi.size()<2){
+        if (players !=null && players.size()<2){
             Toast.makeText(context, "Yêu cầu tối thiểu 2 người chơi", Toast.LENGTH_SHORT).show();
         }else {
             context.startActivity(intent);
@@ -164,73 +163,73 @@ public class GamePlayFeatures {
         }
     }
 
-    public ArrayList<CauHoi> danhSachCauHoiDuocChon(int viTri){
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        int maBoCauHoi=boCauHoiArrayList.get(viTri).getMaBoCauHoi();
-        return cauHoiDAO.cauHoiTheoBo(maBoCauHoi);
+    public ArrayList<Question> selectedQuestions(int position){
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        int questionGroup = questionGroupArrayList.get(position).getId();
+        return questionDAO.filterQuestionByGroup(questionGroup);
     }
 
-    public ArrayList<String> tatCaCauHoiTruth(ArrayList<CauHoi> cauHoiArrayList, Button button){
-        ArrayList<String> danhSachCauHoiTruth=new ArrayList<>();
-        for (CauHoi cauHoi:cauHoiArrayList){
-            if (cauHoi.getPhanLoai()==0){
-                danhSachCauHoiTruth.add(cauHoi.getNoiDung());
+    public ArrayList<String> allTruthQuestions(ArrayList<Question> questionArrayList, Button button){
+        ArrayList<String> truthArrayList =new ArrayList<>();
+        for (Question question : questionArrayList){
+            if (question.getType()==0){
+                truthArrayList.add(question.getContent());
             }
         }
-        if (danhSachCauHoiTruth.isEmpty()){
+        if (truthArrayList.isEmpty()){
             button.setEnabled(false);
         }
-        return danhSachCauHoiTruth;
+        return truthArrayList;
     }
 
-    public ArrayList<String> tatCaCauHoiDare(ArrayList<CauHoi> cauHoiArrayList, Button button){
-        ArrayList<String> danhSachCauHoiDare =new ArrayList<>();
-        for (CauHoi cauHoi:cauHoiArrayList){
-            if (cauHoi.getPhanLoai()==1){
-                danhSachCauHoiDare.add(cauHoi.getNoiDung());
+    public ArrayList<String> allDareQuestions(ArrayList<Question> questionArrayList, Button button){
+        ArrayList<String> dareArrayList =new ArrayList<>();
+        for (Question question : questionArrayList){
+            if (question.getType()==1){
+                dareArrayList.add(question.getContent());
             }
         }
-        if (danhSachCauHoiDare.isEmpty()){
+        if (dareArrayList.isEmpty()){
             button.setEnabled(false);
         }
-        return danhSachCauHoiDare;
+        return dareArrayList;
     }
 
-    public ArrayList<String> tatCaHinhPhat(ArrayList<CauHoi> cauHoiArrayList){
-        ArrayList<String> danhSachHinhPhat =new ArrayList<>();
-        for (CauHoi cauHoi:cauHoiArrayList){
-            if (cauHoi.getPhanLoai()==2){
-                danhSachHinhPhat.add(cauHoi.getNoiDung());
+    public ArrayList<String> allPunishes(ArrayList<Question> questionArrayList){
+        ArrayList<String> punishArrayList =new ArrayList<>();
+        for (Question question : questionArrayList){
+            if (question.getType()==2){
+                punishArrayList.add(question.getContent());
             }
         }
-        return danhSachHinhPhat;
+        return punishArrayList;
     }
 
-    public void cauHoitBatKi(ArrayList<String> cauHoiArrayList, String tenNguoiChoi,
-                             int viTri, ArrayList<String> nguoiChoi,ArrayList<String> hinhPhat){
-        int viTriCauHoi = new Random().nextInt(cauHoiArrayList.size());
+    public void randomQuestion(ArrayList<String> questionArrayList, String playerName,
+                               int position, ArrayList<String> players, ArrayList<String> punishes){
+        int viTriCauHoi = new Random().nextInt(questionArrayList.size());
         Intent intent=new Intent(context, GamePlayScreen_3.class);
         Bundle bundle=new Bundle();
-        bundle.putInt("ViTri",viTri);
-        bundle.putStringArrayList("NguoiChoi",nguoiChoi);
-        bundle.putString("NguoiChoiDuocChon",tenNguoiChoi);
-        bundle.putString("CauHoiDuocChon", cauHoiArrayList.get(viTriCauHoi));
-        bundle.putStringArrayList("HinhPhat",hinhPhat);
+        bundle.putInt("ViTri", position);
+        bundle.putStringArrayList("NguoiChoi",players);
+        bundle.putString("NguoiChoiDuocChon", playerName);
+        bundle.putString("CauHoiDuocChon", questionArrayList.get(viTriCauHoi));
+        bundle.putStringArrayList("HinhPhat", punishes);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
-    public void caiDatSpinnerHinhPhat(Spinner spinner,ArrayList<String> arrayList){
+    public void punishSpinnerSetUp(Spinner spinner, ArrayList<String> arrayList){
         SpinnerAdapter adapter=new SpinnerAdapter(context,arrayList);
         spinner.setAdapter(adapter);
     }
 
-    public void thucHienHinhPhat(int viTri, ArrayList<String> nguoiChoi, ArrayList<String> hinhPhat){
+    public void carryOutAPunishment(int position, ArrayList<String> players, ArrayList<String> punishes){
         Intent intent=new Intent(context, GamePlayScreen_4.class);
         Bundle bundle=new Bundle();
-        bundle.putStringArrayList("HinhPhat",hinhPhat);
-        bundle.putInt("ViTri",viTri);
-        bundle.putStringArrayList("NguoiChoi",nguoiChoi);
+        bundle.putStringArrayList("HinhPhat", punishes);
+        bundle.putInt("ViTri", position);
+        bundle.putStringArrayList("NguoiChoi", players);
         intent.putExtras(bundle);
         context.startActivity(intent);
         ((Activity)context).finish();

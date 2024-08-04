@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bogoc_nguoichoi"
+    android:background="@drawable/corner_radius_player"
     android:padding="@dimen/_20sdp">
 
     <ImageView
@@ -10,12 +10,12 @@
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/xmark_solid"
         android:layout_alignParentEnd="true"
-        android:id="@+id/lichSu_btnThoat"/>
+        android:id="@+id/gamePlayData_btnExit"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/lichSu_btnThoat"
+        android:layout_below="@id/gamePlayData_btnExit"
         android:layout_marginTop="@dimen/_20sdp">
 
         <LinearLayout
@@ -29,14 +29,14 @@
                 android:textSize="@dimen/_15ssp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:id="@+id/lichSu_tvNgayGio"/>
+                android:id="@+id/gamePlayData_tvTime"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15ssp"
                 android:textColor="@color/black"
-                android:id="@+id/lichSu_tvSoNguoiChoi"
+                android:id="@+id/gamePlayData_tvNumPlayer"
                 android:layout_marginTop="@dimen/_10sdp"/>
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15ssp"
                 android:textColor="@color/black"
-                android:id="@+id/lichSu_tvTenNguoiChoi"
+                android:id="@+id/gamePlayData_tvPlayers"
                 android:layout_marginTop="@dimen/_10sdp"/>
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15ssp"
                 android:textColor="@color/black"
-                android:id="@+id/lichSu_tvCauHoi"
+                android:id="@+id/gamePlayData_tvQuestions"
                 android:layout_marginTop="@dimen/_10sdp"/>
         </LinearLayout>
     </ScrollView>

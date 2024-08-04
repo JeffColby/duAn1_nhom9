@@ -22,14 +22,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/_10sdp"
-        android:id="@+id/questionsScreen_btnThem"/>
+        android:id="@+id/questionsScreen_btnAdd"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@id/questionsScreen_btnMenu"
-        android:layout_above="@id/questionsScreen_btnThem"
+        android:layout_above="@id/questionsScreen_btnAdd"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_20sdp">
 
@@ -40,8 +40,8 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/questionsScreen_spBoCauHoi"
-                android:layout_toStartOf="@id/questionsScreen_btnSuThat"
+                android:id="@+id/questionsScreen_spQuestionGroup"
+                android:layout_toStartOf="@id/questionsScreen_btnTruth"
                 android:layout_alignParentStart="true"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_centerVertical="true"/>
@@ -49,29 +49,29 @@
             <LinearLayout
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:background="@drawable/bogoc_suthat"
+                android:background="@drawable/corner_radius_truth"
                 tools:ignore="Orientation"
-                android:id="@+id/questionsScreen_btnSuThat"
-                android:layout_toStartOf="@id/questionsScreen_btnThachThuc"
+                android:id="@+id/questionsScreen_btnTruth"
+                android:layout_toStartOf="@id/questionsScreen_btnDare"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_centerVertical="true"/>
 
             <LinearLayout
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:background="@drawable/bogoc_thachthuc"
+                android:background="@drawable/corner_radius_dare"
                 tools:ignore="Orientation"
-                android:id="@+id/questionsScreen_btnThachThuc"
-                android:layout_toStartOf="@id/questionsScreen_btnHinhPhat"
+                android:id="@+id/questionsScreen_btnDare"
+                android:layout_toStartOf="@id/questionsScreen_btnPunish"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_centerVertical="true"/>
 
             <LinearLayout
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:background="@drawable/bogoc_hinhphat"
+                android:background="@drawable/corner_radius_punish"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/questionsScreen_btnHinhPhat"
+                android:id="@+id/questionsScreen_btnPunish"
                 tools:ignore="Orientation"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
@@ -79,7 +79,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/questionsScreen_rcCauHoi"
+            android:id="@+id/questionsScreen_rcQuestion"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"/>
     </LinearLayout>

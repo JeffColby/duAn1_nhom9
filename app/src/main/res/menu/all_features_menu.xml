@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_manHinhChinh"
+        android:id="@+id/menu_homeScreen"
         android:title="Màn hình chính"/>
 
     <item
-        android:id="@+id/menu_danhSachBoCauHoi"
+        android:id="@+id/menu_questionGroupScreen"
         android:title="Danh sách bộ câu hỏi"/>
 
     <item
-        android:id="@+id/menu_danhSachCauHoi"
+        android:id="@+id/menu_questionScreen"
         android:title="Danh sách câu hỏi"/>
 
     <item
-        android:id="@+id/menu_lichSuChoi"
+        android:id="@+id/menu_GamePlayDataScreen"
         android:title="Lịch sử chơi"/>
 
     <item
-        android:id="@+id/menu_timHieuLuatChoi"
+        android:id="@+id/menu_ruleScreen"
         android:title="Tìm hiểu luật chơi"/>
 
     <item
-        android:id="@+id/menu_thongTinNhaSangLap"
+        android:id="@+id/menu_founderScreen"
         android:title="Thông tin nhà sáng lập"/>
 
     <item
-        android:id="@+id/menu_thoat"
+        android:id="@+id/menu_exit"
         android:title="Thoát"/>
 </menu>

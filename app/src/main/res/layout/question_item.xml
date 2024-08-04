@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_20sdp"
-        android:background="@drawable/bogoc_tongquat"
-        android:id="@+id/cauHoi_layoutPhanLoai">
+        android:background="@drawable/corner_radius_layout"
+        android:id="@+id/question_layoutType">
 
         <TextView
             android:layout_width="match_parent"
@@ -20,8 +20,8 @@
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:textStyle="bold"
-            android:id="@+id/cauHoi_tvPhanLoai"
-            android:layout_toStartOf="@id/cauHoi_btnAnHien"
+            android:id="@+id/question_tvType"
+            android:layout_toStartOf="@id/question_btnExtend"
             android:layout_marginEnd="@dimen/_25sdp"/>
 
         <ImageView
@@ -29,13 +29,14 @@
             android:layout_height="@dimen/_40sdp"
             android:src="@drawable/triangle_up_svgrepo_com"
             android:layout_alignParentEnd="true"
-            android:id="@+id/cauHoi_btnAnHien"/>
+            android:id="@+id/question_btnExtend"/>
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bogoc_chitiet"
-        android:id="@+id/cauHoi_layoutMoRong"
+        android:background="@drawable/corner_radius_detail"
+        android:id="@+id/question_layoutExtend"
         android:visibility="gone"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
@@ -49,25 +50,25 @@
             android:textColor="@color/black"
             android:text="ABC"
             android:textStyle="bold"
-            android:id="@+id/cauHoi_tvNoiDung"/>
+            android:id="@+id/question_tvContent"/>
 
         <ImageView
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:src="@drawable/pen_solid"
-            android:id="@+id/cauHoi_btnSua"
+            android:id="@+id/question_btnEdit"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_below="@id/cauHoi_tvNoiDung"
-            android:layout_toStartOf="@id/cauHoi_btnXoa" />
+            android:layout_below="@id/question_tvContent"
+            android:layout_toStartOf="@id/question_btnDelete" />
 
         <ImageView
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:src="@drawable/trash_solid"
             android:layout_marginTop="@dimen/_15sdp"
-            android:id="@+id/cauHoi_btnXoa"
-            android:layout_below="@id/cauHoi_tvNoiDung"
+            android:id="@+id/question_btnDelete"
+            android:layout_below="@id/question_tvContent"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 

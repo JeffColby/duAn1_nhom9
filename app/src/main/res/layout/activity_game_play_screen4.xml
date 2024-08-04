@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_30sdp"
-            android:id="@+id/gamePlayScreen_4_spHinhPhat"/>
+            android:id="@+id/gamePlayScreen_4_spPunishment"/>
 
         <Button
             android:layout_width="@dimen/_170sdp"
@@ -37,7 +37,7 @@
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/white"
             android:backgroundTint="@color/pink"
-            android:id="@+id/gamePlayScreen_4_btnHoanThanh"
+            android:id="@+id/gamePlayScreen_4_btnComplete"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </RelativeLayout>

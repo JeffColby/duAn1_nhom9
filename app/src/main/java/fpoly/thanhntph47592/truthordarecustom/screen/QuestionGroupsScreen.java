@@ -8,20 +8,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.BoCauHoiAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.BoCauHoiDAO;
+import fpoly.thanhntph47592.truthordarecustom.adapter.QuestionGroupAdapter;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
 import fpoly.thanhntph47592.truthordarecustom.features.QuestionGroupsFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 
 public class QuestionGroupsScreen extends AppCompatActivity {
 
     private static Context context;
-    private ImageView btnMenu, btnThem;
-    private RecyclerView rcBoCauHoi;
-    private BasicFeatures basicFeatures;
-    private QuestionGroupsFeatures questionGroupsFeatures;
-    private BoCauHoiDAO boCauHoiDAO;
-    private BoCauHoiAdapter adapter;
+    ImageView btnMenu, btnAdd;
+    RecyclerView rcQuestionGroup;
+    BasicFeatures basicFeatures;
+    QuestionGroupsFeatures questionGroupsFeatures;
+    QuestionGroupDAO questionGroupDAO;
+    QuestionGroupAdapter adapter;
 
     public static Context getContext() {
         return context;
@@ -33,18 +33,18 @@ public class QuestionGroupsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_question_groups_screen);
         context=this;
 
-        boCauHoiDAO=new BoCauHoiDAO(QuestionGroupsScreen.this);
+        questionGroupDAO =new QuestionGroupDAO(QuestionGroupsScreen.this);
         basicFeatures=new BasicFeatures(QuestionGroupsScreen.this);
         questionGroupsFeatures =new QuestionGroupsFeatures(QuestionGroupsScreen.this);
 
         btnMenu=findViewById(R.id.questionGroupsScreen_btnMenu);
-        btnThem=findViewById(R.id.questionGroupsScreen_btnThem);
-        rcBoCauHoi=findViewById(R.id.questionGroupsScreen_rcBoCauHoi);
+        btnAdd =findViewById(R.id.questionGroupsScreen_btnAdd);
+        rcQuestionGroup =findViewById(R.id.questionGroupsScreen_rcQuestionGroup);
 
-        PopupMenu popupMenu=basicFeatures.caiDatMenu(btnMenu);
-        basicFeatures.caiDatRecycleView(rcBoCauHoi);
-        adapter=new BoCauHoiAdapter(QuestionGroupsScreen.this,boCauHoiDAO.tatCaBoCauHoi());
-        rcBoCauHoi.setAdapter(adapter);
+        PopupMenu popupMenu=basicFeatures.menuSetUp(btnMenu);
+        basicFeatures.recycleViewSetUp(rcQuestionGroup);
+        adapter=new QuestionGroupAdapter(QuestionGroupsScreen.this, questionGroupDAO.allQuestionGroup());
+        rcQuestionGroup.setAdapter(adapter);
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +52,10 @@ public class QuestionGroupsScreen extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionGroupsFeatures.themBoCauHoi(adapter);
+                questionGroupsFeatures.addQuestionGroup(adapter);
             }
         });
     }

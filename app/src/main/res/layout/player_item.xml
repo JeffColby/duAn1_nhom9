@@ -4,22 +4,22 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_10sdp"
     android:padding="@dimen/_20sdp"
-    android:background="@drawable/bogoc_nguoichoi">
+    android:background="@drawable/corner_radius_player">
 
     <ImageView
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/trash_solid"
         android:layout_alignParentEnd="true"
-        android:id="@+id/nguoiChoi_btnXoa"/>
+        android:id="@+id/player_btnDelete"/>
 
     <ImageView
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/pen_solid"
-        android:layout_toStartOf="@id/nguoiChoi_btnXoa"
+        android:layout_toStartOf="@id/player_btnDelete"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:id="@+id/nguoiChoi_btnSua"/>
+        android:id="@+id/player_btnEdit"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -27,8 +27,8 @@
         android:maxLines="3"
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/black"
-        android:layout_toStartOf="@id/nguoiChoi_btnSua"
+        android:layout_toStartOf="@id/player_btnEdit"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:id="@+id/nguoiChoi_tvTenNguoiChoi"
+        android:id="@+id/player_tvPlayerName"
         android:layout_centerVertical="true"/>
 </RelativeLayout>

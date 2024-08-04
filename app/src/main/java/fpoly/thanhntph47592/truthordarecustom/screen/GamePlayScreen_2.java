@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.Random;
 import fpoly.thanhntph47592.truthordarecustom.R;
 import fpoly.thanhntph47592.truthordarecustom.features.GamePlayFeatures;
-import fpoly.thanhntph47592.truthordarecustom.model.CauHoi;
+import fpoly.thanhntph47592.truthordarecustom.model.Question;
 
 public class GamePlayScreen_2 extends AppCompatActivity {
 
     private GamePlayFeatures gamePlayFeatures;
-    private TextView tvTenNguoiChoi;
-    private ImageView btnThoat;
-    private Button btnSuThat,btnThachThuc;
+    TextView tvPlayerName;
+    ImageView btnExit;
+    Button btnTruth,btnDare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,42 +28,42 @@ public class GamePlayScreen_2 extends AppCompatActivity {
 
         gamePlayFeatures=new GamePlayFeatures(GamePlayScreen_2.this);
 
-        tvTenNguoiChoi=findViewById(R.id.gamePlayScreen_2_tvTenNguoiChoi);
-        btnThoat=findViewById(R.id.gamePlayScreen_2_btnThoat);
-        btnSuThat=findViewById(R.id.gamePlayScreen_2_btnSuThat);
-        btnThachThuc=findViewById(R.id.gamePlayScreen_2_btnThachThuc);
+        tvPlayerName =findViewById(R.id.gamePlayScreen_2_tvPlayerName);
+        btnExit=findViewById(R.id.gamePlayScreen_2_btnExit);
+        btnTruth =findViewById(R.id.gamePlayScreen_2_btnTruth);
+        btnDare=findViewById(R.id.gamePlayScreen_2_btnDare);
 
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-        int viTri=bundle.getInt("ViTri");
-        ArrayList<String> nguoiChoi=bundle.getStringArrayList("NguoiChoi");
+        int position =bundle.getInt("ViTri");
+        ArrayList<String> player =bundle.getStringArrayList("NguoiChoi");
 
-        ArrayList<CauHoi> danhSachCauHoi=gamePlayFeatures.danhSachCauHoiDuocChon(viTri);
-        ArrayList<String> tatCaCauHoiTruth=gamePlayFeatures.tatCaCauHoiTruth(danhSachCauHoi,btnSuThat);
-        ArrayList<String> tatCaCauHoiDare =gamePlayFeatures.tatCaCauHoiDare(danhSachCauHoi,btnThachThuc);
-        ArrayList<String> tatCaHinhPhat=gamePlayFeatures.tatCaHinhPhat(danhSachCauHoi);
+        ArrayList<Question> questionArrayList =gamePlayFeatures.selectedQuestions(position);
+        ArrayList<String> truthQuestions =gamePlayFeatures.allTruthQuestions(questionArrayList, btnTruth);
+        ArrayList<String> dareQuestionsare =gamePlayFeatures.allDareQuestions(questionArrayList,btnDare);
+        ArrayList<String> punishes =gamePlayFeatures.allPunishes(questionArrayList);
 
-        int nguoiChoiBatKi = new Random().nextInt(nguoiChoi.size());
-        String tenNguoiChoi=nguoiChoi.get(nguoiChoiBatKi);
-        tvTenNguoiChoi.setText(tenNguoiChoi);
-        tvTenNguoiChoi.setMovementMethod(new ScrollingMovementMethod());
+        int randomPlayer = new Random().nextInt(player.size());
+        String playerName = player.get(randomPlayer);
+        tvPlayerName.setText(playerName);
+        tvPlayerName.setMovementMethod(new ScrollingMovementMethod());
 
-        btnThoat.setOnClickListener(new View.OnClickListener() {
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.thoatTroChoi();
+                gamePlayFeatures.gamePlayExit();
             }
         });
-        btnSuThat.setOnClickListener(new View.OnClickListener() {
+        btnTruth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.cauHoitBatKi(tatCaCauHoiTruth,tenNguoiChoi,viTri,nguoiChoi,tatCaHinhPhat);
+                gamePlayFeatures.randomQuestion(truthQuestions, playerName, position, player, punishes);
             }
         });
-        btnThachThuc.setOnClickListener(new View.OnClickListener() {
+        btnDare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.cauHoitBatKi(tatCaCauHoiDare,tenNguoiChoi,viTri,nguoiChoi,tatCaHinhPhat);
+                gamePlayFeatures.randomQuestion(dareQuestionsare, playerName, position, player, punishes);
             }
         });
     }

@@ -12,5 +12,5 @@
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:id="@+id/spinner_tvNoiDung"/>
+        android:id="@+id/spinner_tvContent"/>
 </LinearLayout>

@@ -12,8 +12,8 @@ import fpoly.thanhntph47592.truthordarecustom.features.GamePlayFeatures;
 public class GamePlayScreen_1 extends AppCompatActivity {
 
     private GamePlayFeatures gamePlayFeatures;
-    private ImageView btnThoat;
-    private Button btnBatDau;
+    ImageView btnExit;
+    Button btnStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,22 +22,22 @@ public class GamePlayScreen_1 extends AppCompatActivity {
 
         gamePlayFeatures=new GamePlayFeatures(GamePlayScreen_1.this);
 
-        btnThoat=findViewById(R.id.gamePlayScreen_1_btnThoat);
-        btnBatDau=findViewById(R.id.gamePlayScreen_1_btnBatDau);
+        btnExit=findViewById(R.id.gamePlayScreen_1_btnExit);
+        btnStart =findViewById(R.id.gamePlayScreen_1_btnStart);
 
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
 
-        btnThoat.setOnClickListener(new View.OnClickListener() {
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.thoatTroChoi();
+                gamePlayFeatures.gamePlayExit();
             }
         });
-        btnBatDau.setOnClickListener(new View.OnClickListener() {
+        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.batDauChoi(bundle.getInt("ViTri"),bundle.getStringArrayList("NguoiChoi"),
+                gamePlayFeatures.startPlaying(bundle.getInt("ViTri"),bundle.getStringArrayList("NguoiChoi"),
                         GamePlayScreen_2.class);
             }
         });

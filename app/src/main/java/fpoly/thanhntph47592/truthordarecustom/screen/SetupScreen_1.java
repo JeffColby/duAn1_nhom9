@@ -7,20 +7,20 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.dao.BoCauHoiDAO;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
 import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.QuestionGroupsFeatures;
 import fpoly.thanhntph47592.truthordarecustom.features.QuestionsFeatures;
-import fpoly.thanhntph47592.truthordarecustom.model.BoCauHoi;
+import fpoly.thanhntph47592.truthordarecustom.model.QuestionGroup;
 
 public class SetupScreen_1 extends AppCompatActivity {
 
-    private BasicFeatures basicFeatures;
-    private QuestionsFeatures questionFeatures;
-    private QuestionGroupsFeatures questionGroupsFeatures;
-    private BoCauHoiDAO boCauHoiDAO;
-    private Button btnThoat,btnTiepTheo;
-    private Spinner spBoCauHoi;
+    BasicFeatures basicFeatures;
+    QuestionsFeatures questionFeatures;
+    QuestionGroupsFeatures questionGroupsFeatures;
+    QuestionGroupDAO questionGroupDAO;
+    Button btnExit, btnNext;
+    Spinner spQuestionGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +30,28 @@ public class SetupScreen_1 extends AppCompatActivity {
         basicFeatures=new BasicFeatures(SetupScreen_1.this);
         questionFeatures=new QuestionsFeatures(SetupScreen_1.this);
         questionGroupsFeatures=new QuestionGroupsFeatures(SetupScreen_1.this);
-        boCauHoiDAO=new BoCauHoiDAO(SetupScreen_1.this);
+        questionGroupDAO =new QuestionGroupDAO(SetupScreen_1.this);
 
-        btnThoat=findViewById(R.id.setUpScreen1_btnThoat);
-        btnTiepTheo=findViewById(R.id.setUpScreen1_btnTieptheo);
-        spBoCauHoi=findViewById(R.id.setUpScreen1_spBoCauHoi);
-        questionFeatures.caiDatSpinnerBoCauHoi(spBoCauHoi);
+        btnExit =findViewById(R.id.setUpScreen1_btnExit);
+        btnNext =findViewById(R.id.setUpScreen1_btnNext);
+        spQuestionGroup =findViewById(R.id.setUpScreen1_spQuesionGroup);
+        questionFeatures.questionGroupSpinnerSetUp(spQuestionGroup);
 
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        if (boCauHoiArrayList.isEmpty()){
-            questionGroupsFeatures.kiemTraBoCauHoi();
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        if (questionGroupArrayList.isEmpty()){
+            questionGroupsFeatures.checkQuestionGroup();
         }
 
-        btnThoat.setOnClickListener(new View.OnClickListener() {
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    basicFeatures.chuyenMan(HomeScreen.class);
+                    basicFeatures.nextScreen(HomeScreen.class);
                 }
         });
-        btnTiepTheo.setOnClickListener(new View.OnClickListener() {
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionFeatures.kiemTraSoCauHoi(spBoCauHoi.getSelectedItemPosition());
+                questionFeatures.checkQuestionQuantity(spQuestionGroup.getSelectedItemPosition());
             }
         });
     }

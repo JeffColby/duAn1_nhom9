@@ -13,7 +13,7 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/back_svgrepo_com"
-        android:id="@+id/rulesScreen_btnTroVe"/>
+        android:id="@+id/rulesScreen_btnBack"/>
 
     <Button
         android:layout_width="@dimen/_200sdp"
@@ -23,16 +23,16 @@
         android:backgroundTint="@color/pink"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
-        android:id="@+id/rulesScreen_btnBatDau"
+        android:id="@+id/rulesScreen_btnStartPlaying"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rulesScreen_btnTroVe"
-        android:layout_above="@id/rulesScreen_btnBatDau"
-        android:id="@+id/rulesScreen_tvNoiDung"
+        android:layout_below="@id/rulesScreen_btnBack"
+        android:layout_above="@id/rulesScreen_btnStartPlaying"
+        android:id="@+id/rulesScreen_tvContent"
         android:textColor="@color/hardBlue"
         android:textStyle="bold"
         android:gravity="center_vertical"

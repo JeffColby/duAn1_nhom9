@@ -13,8 +13,8 @@ import fpoly.thanhntph47592.truthordarecustom.features.GamePlayFeatures;
 public class GamePlayScreen_4 extends AppCompatActivity {
 
     private GamePlayFeatures gamePlayFeatures;
-    private Spinner spHinhPhat;
-    private Button btnHoanThanh;
+    Spinner spPunishment;
+    Button btnComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,19 +23,19 @@ public class GamePlayScreen_4 extends AppCompatActivity {
 
         gamePlayFeatures=new GamePlayFeatures(GamePlayScreen_4.this);
 
-        spHinhPhat=findViewById(R.id.gamePlayScreen_4_spHinhPhat);
-        btnHoanThanh=findViewById(R.id.gamePlayScreen_4_btnHoanThanh);
+        spPunishment=findViewById(R.id.gamePlayScreen_4_spPunishment);
+        btnComplete =findViewById(R.id.gamePlayScreen_4_btnComplete);
 
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-        ArrayList<String> hinhPhat=bundle.getStringArrayList("HinhPhat");
+        ArrayList<String> punishments =bundle.getStringArrayList("HinhPhat");
 
-        gamePlayFeatures.caiDatSpinnerHinhPhat(spHinhPhat,hinhPhat);
+        gamePlayFeatures.punishSpinnerSetUp(spPunishment, punishments);
 
-        btnHoanThanh.setOnClickListener(new View.OnClickListener() {
+        btnComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.batDauChoi(bundle.getInt("ViTri"),
+                gamePlayFeatures.startPlaying(bundle.getInt("ViTri"),
                         bundle.getStringArrayList("NguoiChoi"), GamePlayScreen_1.class);
             }
         });

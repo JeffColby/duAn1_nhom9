@@ -14,7 +14,7 @@
         android:layout_height="@dimen/_50sdp"
         android:text="Bắt đầu"
         android:backgroundTint="@color/pink"
-        android:id="@+id/setUpScreen2_btnBatDau"
+        android:id="@+id/setUpScreen2_btnStart"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
@@ -29,16 +29,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp"
-        android:background="@drawable/bogoc_suthat"
+        android:background="@drawable/corner_radius_truth"
         android:layout_toStartOf="@id/yLine"
         android:orientation="vertical"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:id="@+id/setUpScreen2_btnTroLai"/>
+        android:id="@+id/setUpScreen2_btnBack"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp"
-        android:background="@drawable/bogoc_suthat"
+        android:background="@drawable/corner_radius_truth"
         android:layout_toEndOf="@id/yLine"
         android:orientation="vertical"
         android:layout_marginStart="@dimen/_10sdp" />
@@ -47,8 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/setUpScreen2_btnTroLai"
-        android:layout_above="@id/setUpScreen2_btnBatDau"
+        android:layout_below="@id/setUpScreen2_btnBack"
+        android:layout_above="@id/setUpScreen2_btnStart"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp">
 
@@ -72,7 +72,7 @@
                 android:backgroundTint="@color/hardBlue"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"
-                android:id="@+id/setUpScreen2_btnThem"
+                android:id="@+id/setUpScreen2_btnAdd"
                 android:layout_alignParentEnd="true"/>
 
             <EditText
@@ -81,10 +81,10 @@
                 android:textSize="@dimen/_15ssp"
                 android:hint="Nhập tên người chơi"
                 android:maxLines="1"
-                android:id="@+id/setUpScreen2_edTenNguoiChoi"
+                android:id="@+id/setUpScreen2_edPlayerName"
                 android:textColor="@color/hardBlue"
                 android:textColorHint="@color/hardBlue"
-                android:layout_toStartOf="@id/setUpScreen2_btnThem"
+                android:layout_toStartOf="@id/setUpScreen2_btnAdd"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
@@ -93,6 +93,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:id="@+id/setUpScreen2_rcNguoiChoi"/>
+            android:id="@+id/setUpScreen2_rcPlayer"/>
     </LinearLayout>
 </RelativeLayout>

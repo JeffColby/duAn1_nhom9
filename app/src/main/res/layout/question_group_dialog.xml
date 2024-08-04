@@ -13,7 +13,7 @@
         android:textSize="@dimen/_25ssp"
         android:textColor="@color/pink"
         android:textStyle="bold"
-        android:id="@+id/boCauHoi_tvTieuDe"
+        android:id="@+id/questionGroupDialog_tvTittle"
         android:textAlignment="center"/>
 
     <EditText
@@ -23,7 +23,7 @@
         android:hint="Nhập tên bộ câu hỏi"
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/black"
-        android:id="@+id/boCauHoi_edNoiDung"
+        android:id="@+id/questionGroupDialog_edName"
         android:textColorHint="@color/black"
         android:layout_marginTop="@dimen/_20sdp"/>
 
@@ -41,7 +41,7 @@
             android:backgroundTint="@color/pink"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
-            android:id="@+id/boCauHoi_btnDongY"
+            android:id="@+id/questionGroupDialog_btnAdd"
             android:layout_marginEnd="@dimen/_10sdp"/>
 
         <Button
@@ -51,7 +51,7 @@
             android:backgroundTint="@color/hardBlue"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
-            android:id="@+id/boCauHoi_btnTuChoi"
+            android:id="@+id/questionGroupDialog_btnCancel"
             android:layout_marginStart="@dimen/_10sdp"/>
     </LinearLayout>
 </LinearLayout>

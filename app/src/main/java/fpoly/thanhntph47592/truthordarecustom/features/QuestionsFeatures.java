@@ -14,92 +14,92 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.CauHoiAdapter;
+import fpoly.thanhntph47592.truthordarecustom.adapter.QuestionAdapter;
 import fpoly.thanhntph47592.truthordarecustom.adapter.SpinnerAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.BoCauHoiDAO;
-import fpoly.thanhntph47592.truthordarecustom.dao.CauHoiDAO;
-import fpoly.thanhntph47592.truthordarecustom.model.BoCauHoi;
-import fpoly.thanhntph47592.truthordarecustom.model.CauHoi;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
+import fpoly.thanhntph47592.truthordarecustom.dao.QuestionDAO;
+import fpoly.thanhntph47592.truthordarecustom.model.QuestionGroup;
+import fpoly.thanhntph47592.truthordarecustom.model.Question;
 import fpoly.thanhntph47592.truthordarecustom.screen.SetupScreen_2;
 
 public class QuestionsFeatures {
 
     private Context context;
-    private BoCauHoiDAO boCauHoiDAO;
-    private CauHoiDAO cauHoiDAO;
+    private QuestionGroupDAO questionGroupDAO;
+    private QuestionDAO questionDAO;
 
     public QuestionsFeatures(Context context) {
         this.context = context;
-        boCauHoiDAO=new BoCauHoiDAO(context);
-        cauHoiDAO=new CauHoiDAO(context);
+        questionGroupDAO =new QuestionGroupDAO(context);
+        questionDAO =new QuestionDAO(context);
     }
 
-    public void caiDatSpinnerBoCauHoi(Spinner spinner){
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        ArrayList<String> fullBoCauHoi=new ArrayList<>();
-        for (BoCauHoi boCauHoi:boCauHoiArrayList){
-            fullBoCauHoi.add(boCauHoi.getTenBoCauHoi());
+    public void questionGroupSpinnerSetUp(Spinner spinner){
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        ArrayList<String> allQuestionGroup =new ArrayList<>();
+        for (QuestionGroup questionGroup : questionGroupArrayList){
+            allQuestionGroup.add(questionGroup.getName());
         }
-        SpinnerAdapter adapter=new SpinnerAdapter(context,fullBoCauHoi);
+        SpinnerAdapter adapter=new SpinnerAdapter(context, allQuestionGroup);
         spinner.setAdapter(adapter);
     }
 
-    public void caiDatSpinnerPhanLoai(Spinner spinner){
-        ArrayList<String> phanLoai=new ArrayList<>();
-        phanLoai.add("Sự thật");
-        phanLoai.add("Thách thức");
-        phanLoai.add("Hình phạt");
-        SpinnerAdapter adapter=new SpinnerAdapter(context,phanLoai);
+    public void typeSpinnerSetUp(Spinner spinner){
+        ArrayList<String> type =new ArrayList<>();
+        type.add("Sự thật");
+        type.add("Thách thức");
+        type.add("Hình phạt");
+        SpinnerAdapter adapter=new SpinnerAdapter(context, type);
         spinner.setAdapter(adapter);
     }
 
-    public void locCauHoiTheoBo(int viTri, CauHoiAdapter cauHoiAdapter, RecyclerView rcCauHoi){
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        int maBoCauHoi=boCauHoiArrayList.get(viTri).getMaBoCauHoi();
-        ArrayList<CauHoi> cauHoiArrayList=cauHoiDAO.cauHoiTheoBo(maBoCauHoi);
+    public void filterByGroup(int position, QuestionAdapter questionAdapter, RecyclerView recyclerView){
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        int maBoCauHoi= questionGroupArrayList.get(position).getId();
+        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(maBoCauHoi);
 
-        cauHoiAdapter.setArrayList(cauHoiArrayList);
-        rcCauHoi.setAdapter(cauHoiAdapter);
+        questionAdapter.setArrayList(questionArrayList);
+        recyclerView.setAdapter(questionAdapter);
     }
 
-    public void themCauHoi(int viTri,CauHoiAdapter adapter,RecyclerView rcCauHoi){
+    public void addQuestion(int position, QuestionAdapter adapter, RecyclerView recyclerView){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        View view= LayoutInflater.from(context).inflate(R.layout.cauhoi_dialog,null);
+        View view= LayoutInflater.from(context).inflate(R.layout.question_dialog,null);
         builder.setView(view);
         AlertDialog dialog=builder.create();
         dialog.show();
 
-        EditText edNoiDung=view.findViewById(R.id.cauHoi_edNoiDung);
-        Button btnThem=view.findViewById(R.id.cauHoi_btnDongY);
-        Button btnHuy=view.findViewById(R.id.cauHoi_btnTuChoi);
-        Spinner spBoCauHoi=view.findViewById(R.id.cauHoiDialog_spBoCauHoi);
-        Spinner spPhanLoai=view.findViewById(R.id.cauHoiDialog_spPhanLoai);
-        caiDatSpinnerPhanLoai(spPhanLoai);
-        caiDatSpinnerBoCauHoi(spBoCauHoi);
+        EditText edContent =view.findViewById(R.id.questionDialog_edContent);
+        Button btnAdd =view.findViewById(R.id.questionDialog_btnAdd);
+        Button btnCancel =view.findViewById(R.id.questionDialog_btnCancel);
+        Spinner spQuestionGroup =view.findViewById(R.id.questionDialog_spQuestionGroup);
+        Spinner spType =view.findViewById(R.id.questionDialog_spType);
+        typeSpinnerSetUp(spType);
+        questionGroupSpinnerSetUp(spQuestionGroup);
 
-        btnHuy.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String noiDung=edNoiDung.getText().toString();
-                if (noiDung.isEmpty()){
+                String content = edContent.getText().toString();
+                if (content.isEmpty()){
                     Toast.makeText(context, "Nội dung không hợp lệ", Toast.LENGTH_SHORT).show();
                 }else {
-                    ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-                    int maBoCauHoi=boCauHoiArrayList.get(spBoCauHoi.getSelectedItemPosition()).getMaBoCauHoi();
-                    CauHoi cauHoi=new CauHoi(noiDung,spPhanLoai.getSelectedItemPosition(),maBoCauHoi);
-                    boolean check=cauHoiDAO.themCauHoi(cauHoi);
+                    ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+                    int questionGroup = questionGroupArrayList.get(spQuestionGroup.getSelectedItemPosition()).getId();
+                    Question question =new Question(content, spType.getSelectedItemPosition(), questionGroup);
+                    boolean check= questionDAO.addQuestion(question);
                     if (check){
                         Toast.makeText(context, "Thêm câu hỏi thành công", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        if (viTri==spBoCauHoi.getSelectedItemPosition()){
-                            adapter.setArrayList(cauHoiDAO.cauHoiTheoBo(maBoCauHoi));
-                            rcCauHoi.setAdapter(adapter);
+                        if (position == spQuestionGroup.getSelectedItemPosition()){
+                            adapter.setArrayList(questionDAO.filterQuestionByGroup(questionGroup));
+                            recyclerView.setAdapter(adapter);
                         }
                     }
                 }
@@ -107,28 +107,28 @@ public class QuestionsFeatures {
         });
     }
 
-    public void locCauHoiTheoPhanLoai(int viTri,int phanLoai,ArrayList<CauHoi> arrayList,
-                                      CauHoiAdapter adapter,RecyclerView recyclerView){
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        int maBoCauHoi=boCauHoiArrayList.get(viTri).getMaBoCauHoi();
-        ArrayList<CauHoi> cauHoiArrayList=cauHoiDAO.cauHoiTheoBo(maBoCauHoi);
+    public void filterByType(int position, int type, ArrayList<Question> arrayList,
+                                      QuestionAdapter adapter, RecyclerView recyclerView){
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        int maBoCauHoi= questionGroupArrayList.get(position).getId();
+        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(maBoCauHoi);
 
-        if (arrayList.size() == cauHoiArrayList.size()){
-            ArrayList<CauHoi> arrayList1=new ArrayList<>();
-            for (CauHoi cauHoi:cauHoiArrayList){
-                if (phanLoai==cauHoi.getPhanLoai()){
-                    arrayList1.add(cauHoi);
+        if (arrayList.size() == questionArrayList.size()){
+            ArrayList<Question> arrayList1=new ArrayList<>();
+            for (Question question : questionArrayList){
+                if (type == question.getType()){
+                    arrayList1.add(question);
                 }
             }
             adapter.setArrayList(arrayList1);
             recyclerView.setAdapter(adapter);
         }else {
-            adapter.setArrayList(cauHoiArrayList);
+            adapter.setArrayList(questionArrayList);
             recyclerView.setAdapter(adapter);
         }
     }
 
-    public void xoaCauHoi(CauHoi cauHoi,ArrayList<CauHoi> arrayList,CauHoiAdapter adapter){
+    public void deleteQuestion(Question question, ArrayList<Question> arrayList, QuestionAdapter adapter){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setMessage("Bạn muốn xóa câu hỏi này?");
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -140,10 +140,10 @@ public class QuestionsFeatures {
         builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                boolean check= cauHoiDAO.xoaCauHoi(cauHoi);
+                boolean check= questionDAO.deleteQuestion(question);
                 if (check){
                     Toast.makeText(context, "Xóa câu hỏi thành công", Toast.LENGTH_SHORT).show();
-                    arrayList.remove(cauHoi);
+                    arrayList.remove(question);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -151,55 +151,55 @@ public class QuestionsFeatures {
         builder.show();
     }
 
-    public void suaCauHoi(CauHoi cauHoi, CauHoiAdapter adapter, TextView tvPhanLoai,
-                          RelativeLayout layoutPhanLoai,ArrayList<CauHoi> cauHoiArrayList){
+    public void editQuestion(Question question, QuestionAdapter adapter, TextView tvType,
+                          RelativeLayout typeLayout, ArrayList<Question> questionArrayList){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        View view= LayoutInflater.from(context).inflate(R.layout.cauhoi_dialog,null);
+        View view= LayoutInflater.from(context).inflate(R.layout.question_dialog,null);
         builder.setView(view);
         AlertDialog dialog=builder.create();
         dialog.show();
 
-        TextView tvTieuDe=view.findViewById(R.id.cauHoi_tvTieuDe);
-        EditText edNoiDung=view.findViewById(R.id.cauHoi_edNoiDung);
-        Button btnLuu =view.findViewById(R.id.cauHoi_btnDongY);
-        Button btnHuy=view.findViewById(R.id.cauHoi_btnTuChoi);
-        Spinner spBoCauHoi=view.findViewById(R.id.cauHoiDialog_spBoCauHoi);
-        Spinner spPhanLoai=view.findViewById(R.id.cauHoiDialog_spPhanLoai);
-        caiDatSpinnerPhanLoai(spPhanLoai);
-        caiDatSpinnerBoCauHoi(spBoCauHoi);
-        btnLuu.setText("Lưu");
-        tvTieuDe.setText("Sửa câu hỏi");
-        edNoiDung.setText(cauHoi.getNoiDung());
+        TextView tvTittle =view.findViewById(R.id.questionDialog_tvTittle);
+        EditText edContent =view.findViewById(R.id.questionDialog_edContent);
+        Button btnSave =view.findViewById(R.id.questionDialog_btnAdd);
+        Button btnCancel =view.findViewById(R.id.questionDialog_btnCancel);
+        Spinner spQuestionGroup =view.findViewById(R.id.questionDialog_spQuestionGroup);
+        Spinner spType =view.findViewById(R.id.questionDialog_spType);
+        typeSpinnerSetUp(spType);
+        questionGroupSpinnerSetUp(spQuestionGroup);
+        btnSave.setText("Lưu");
+        tvTittle.setText("Sửa câu hỏi");
+        edContent.setText(question.getContent());
 
-        btnHuy.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        btnLuu.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int boCauHoiCu=cauHoi.getBoCauHoi();
-                int phanLoaiCu=cauHoi.getPhanLoai();
-                String noiDungMoi=edNoiDung.getText().toString();
-                if (noiDungMoi.isEmpty()){
+                int oldQuestionGroup = question.getQuestionGroup();
+                int oldType = question.getType();
+                String newContent = edContent.getText().toString();
+                if (newContent.isEmpty()){
                     Toast.makeText(context, "Nội dung không hợp lệ", Toast.LENGTH_SHORT).show();
                 }else {
-                    ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-                    int boCauHoiMoi=boCauHoiArrayList.get(spBoCauHoi.getSelectedItemPosition()).getMaBoCauHoi();
-                    int phanLoaiMoi=spPhanLoai.getSelectedItemPosition();
-                    cauHoi.setNoiDung(noiDungMoi);
-                    cauHoi.setPhanLoai(phanLoaiMoi);
-                    cauHoi.setBoCauHoi(boCauHoiMoi);
-                    boolean check=cauHoiDAO.suaCauHoi(cauHoi);
+                    ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+                    int newQuestionGroup = questionGroupArrayList.get(spQuestionGroup.getSelectedItemPosition()).getId();
+                    int newType = spType.getSelectedItemPosition();
+                    question.setContent(newContent);
+                    question.setType(newType);
+                    question.setQuestionGroup(newQuestionGroup);
+                    boolean check= questionDAO.editQuestion(question);
                     if (check){
-                        if (boCauHoiCu==boCauHoiMoi){
-                            if (phanLoaiCu!=phanLoaiMoi){
-                                new BasicFeatures(context).caiDatMauSac(phanLoaiMoi,tvPhanLoai,layoutPhanLoai);
+                        if (oldQuestionGroup == newQuestionGroup){
+                            if (oldType != newType){
+                                new BasicFeatures(context).colorSetUp(newType, tvType, typeLayout);
                             }
                         }else {
-                            cauHoiArrayList.remove(cauHoi);
+                            questionArrayList.remove(question);
                         }
                         adapter.notifyDataSetChanged();
                         Toast.makeText(context, "Sửa câu hỏi thành công", Toast.LENGTH_SHORT).show();
@@ -210,19 +210,19 @@ public class QuestionsFeatures {
         });
     }
 
-    public void kiemTraSoCauHoi(int viTri){
-        ArrayList<BoCauHoi> boCauHoiArrayList=boCauHoiDAO.tatCaBoCauHoi();
-        int maBoCauHoi=boCauHoiArrayList.get(viTri).getMaBoCauHoi();
-        ArrayList<CauHoi> cauHoiArrayList=cauHoiDAO.cauHoiTheoBo(maBoCauHoi);
+    public void checkQuestionQuantity(int position){
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        int maBoCauHoi= questionGroupArrayList.get(position).getId();
+        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(maBoCauHoi);
 
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        if (cauHoiArrayList.isEmpty()){
+        if (questionArrayList.isEmpty()){
             builder.setTitle("Bộ câu hỏi trống");
             builder.setMessage("Bạn cần thêm câu hỏi hoặc chọn bộ câu hỏi khác để bắt đầu");
             builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    new QuestionGroupsFeatures(context).xemChiTietDanhSachCauHoi(viTri);
+                    new QuestionGroupsFeatures(context).questionGroupDetail(position);
                 }
             });
             builder.setNegativeButton("Chọn bộ khác", new DialogInterface.OnClickListener() {
@@ -233,7 +233,7 @@ public class QuestionsFeatures {
             });
             builder.show();
         }else {
-            new GamePlayFeatures(context).batDauChoi(viTri,null, SetupScreen_2.class);
+            new GamePlayFeatures(context).startPlaying(position,null, SetupScreen_2.class);
         }
     }
 

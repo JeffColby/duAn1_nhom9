@@ -37,8 +37,8 @@ public class SpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=LayoutInflater.from(context).inflate(R.layout.spinner_text_item,parent,false);
-        TextView tvNoiDung=convertView.findViewById(R.id.spinner_tvNoiDung);
-        tvNoiDung.setText(arrayList.get(position));
+        TextView tvContent =convertView.findViewById(R.id.spinner_tvContent);
+        tvContent.setText(arrayList.get(position));
         return convertView;
     }
 }

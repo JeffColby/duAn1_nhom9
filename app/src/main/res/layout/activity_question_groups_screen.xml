@@ -22,14 +22,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/_10sdp"
-        android:id="@+id/questionGroupsScreen_btnThem"/>
+        android:id="@+id/questionGroupsScreen_btnAdd"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/questionGroupsScreen_btnMenu"
-        android:layout_above="@id/questionGroupsScreen_btnThem"
+        android:layout_above="@id/questionGroupsScreen_btnAdd"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:id="@+id/questionGroupsScreen_rcBoCauHoi"/>
+        android:id="@+id/questionGroupsScreen_rcQuestionGroup"/>
 </RelativeLayout>

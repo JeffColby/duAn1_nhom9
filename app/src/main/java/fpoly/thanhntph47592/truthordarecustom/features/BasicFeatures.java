@@ -34,40 +34,40 @@ public class BasicFeatures {
         this.context=context;
     }
 
-    public void chuyenMan(Class mClass){
+    public void nextScreen(Class mClass){
         Intent intent=new Intent(context,mClass);
         context.startActivity(intent);
         ((Activity)context).finish();
     }
 
-    public PopupMenu caiDatMenu(ImageView imageView){
+    public PopupMenu menuSetUp(ImageView imageView){
         PopupMenu popupMenu=new PopupMenu(context,imageView);
         popupMenu.getMenuInflater().inflate(R.menu.all_features_menu, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId()==R.id.menu_manHinhChinh){
+                if (item.getItemId()==R.id.menu_homeScreen){
                     if (!context.equals(HomeScreen.getContext())){
-                        chuyenMan(HomeScreen.class);
+                        nextScreen(HomeScreen.class);
                     }
-                } else if (item.getItemId()==R.id.menu_timHieuLuatChoi) {
-                    chuyenMan(RulesScreen.class);
-                } else if (item.getItemId()==R.id.menu_thoat) {
-                    xacNhanThoatApp();
-                } else if (item.getItemId()==R.id.menu_thongTinNhaSangLap) {
-                    chuyenMan(FoundersScreen.class);
-                } else if (item.getItemId()==R.id.menu_danhSachBoCauHoi) {
+                } else if (item.getItemId()==R.id.menu_ruleScreen) {
+                    nextScreen(RulesScreen.class);
+                } else if (item.getItemId()==R.id.menu_exit) {
+                    exitConfirm();
+                } else if (item.getItemId()==R.id.menu_founderScreen) {
+                    nextScreen(FoundersScreen.class);
+                } else if (item.getItemId()==R.id.menu_questionGroupScreen) {
                     if (!context.equals(QuestionGroupsScreen.getContext())){
-                        chuyenMan(QuestionGroupsScreen.class);
+                        nextScreen(QuestionGroupsScreen.class);
                     }
-                } else if (item.getItemId()==R.id.menu_danhSachCauHoi) {
+                } else if (item.getItemId()==R.id.menu_questionScreen) {
                     if (!context.equals(QuestionsScreen.getContext())){
-                        chuyenMan(QuestionsScreen.class);
+                        nextScreen(QuestionsScreen.class);
                     }
-                }else if (item.getItemId()==R.id.menu_lichSuChoi){
+                }else if (item.getItemId()==R.id.menu_GamePlayDataScreen){
                     if (!context.equals(HistoryScreen.getContext())) {
-                        chuyenMan(HistoryScreen.class);
+                        nextScreen(HistoryScreen.class);
                     }
                 }
                 return true;
@@ -77,7 +77,7 @@ public class BasicFeatures {
         return popupMenu;
     }
 
-    public void xacNhanThoatApp(){
+    public void exitConfirm(){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setMessage("Bạn muốn thoát ứng dụng?");
         builder.setNegativeButton("Ở lại", new DialogInterface.OnClickListener() {
@@ -95,44 +95,44 @@ public class BasicFeatures {
         builder.show();
     }
 
-    public void moFacebook(String linkFacebook){
+    public void openFacebook(String facebookURL){
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(linkFacebook));
+        intent.setData(Uri.parse(facebookURL));
         context.startActivity(intent);
     }
 
-    public void anHien(ImageView btnAnHien, RelativeLayout layoutMoRong){
-        if (layoutMoRong.getVisibility()== View.GONE){
-            btnAnHien.setImageResource(R.drawable.triangle_down_svgrepo_com);
-            layoutMoRong.setVisibility(View.VISIBLE);
+    public void hideAndShow(ImageView btnHideAndShow, RelativeLayout extendLayout){
+        if (extendLayout.getVisibility()== View.GONE){
+            btnHideAndShow.setImageResource(R.drawable.triangle_down_svgrepo_com);
+            extendLayout.setVisibility(View.VISIBLE);
         }else {
-            btnAnHien.setImageResource(R.drawable.triangle_up_svgrepo_com);
-            layoutMoRong.setVisibility(View.GONE);
+            btnHideAndShow.setImageResource(R.drawable.triangle_up_svgrepo_com);
+            extendLayout.setVisibility(View.GONE);
         }
     }
 
-    public void caiDatMauSac(int phanLoai, TextView tvPhanLoai, RelativeLayout layoutPhanLoai){
-        if (phanLoai==0){
-            tvPhanLoai.setText("Sự thật");
-            layoutPhanLoai.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF66C4")));
-        } else if (phanLoai==1) {
-            tvPhanLoai.setText("Thách thức");
-            layoutPhanLoai.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#5CE1E6")));
-        } else if (phanLoai==2) {
-            tvPhanLoai.setText("Hình phạt");
-            layoutPhanLoai.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0066FF")));
+    public void colorSetUp(int type, TextView tvType, RelativeLayout typeLayout){
+        if (type ==0){
+            tvType.setText("Sự thật");
+            typeLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF66C4")));
+        } else if (type ==1) {
+            tvType.setText("Thách thức");
+            typeLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#5CE1E6")));
+        } else if (type ==2) {
+            tvType.setText("Hình phạt");
+            typeLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0066FF")));
         }
     }
 
-    public void caiDatRecycleView(RecyclerView recyclerView){
+    public void recycleViewSetUp(RecyclerView recyclerView){
         LinearLayoutManager manager=new LinearLayoutManager(context);
         manager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(manager);
     }
 
-    public void catDatChuGachChan(TextView textView, String noiDung){
-        SpannableString spannableString = new SpannableString(noiDung);
-        spannableString.setSpan(new UnderlineSpan(), 0, noiDung.length(), 0);
+    public void textUnderlineSetUp(TextView textView, String content){
+        SpannableString spannableString = new SpannableString(content);
+        spannableString.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textView.setText(spannableString);
     }
 }

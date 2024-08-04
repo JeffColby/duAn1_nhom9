@@ -13,8 +13,8 @@ import fpoly.thanhntph47592.truthordarecustom.features.GamePlayFeatures;
 public class GamePlayScreen_3 extends AppCompatActivity {
 
     private GamePlayFeatures gamePlayFeatures;
-    private TextView tvTenNguoiChoi, tvNoiDungCauHoi;
-    private Button btnHoanThanh, btnTrungCauHoi, btnChiuThua;
+    TextView tvPlayerName, tvQuestion;
+    Button btnComplete, btnCoinsident, btnSurrender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,35 +23,35 @@ public class GamePlayScreen_3 extends AppCompatActivity {
 
         gamePlayFeatures=new GamePlayFeatures(GamePlayScreen_3.this);
 
-        tvTenNguoiChoi=findViewById(R.id.gamePlayScreen_3_tvTenNguoiChoi);
-        tvNoiDungCauHoi=findViewById(R.id.gamePlayScreen_3_tvNoiDungCauHoi);
-        btnHoanThanh=findViewById(R.id.gamePlayScreen_3_btnHoanThanh);
-        btnTrungCauHoi=findViewById(R.id.gamePlayScreen_3_btnTrungCauHoi);
-        btnChiuThua=findViewById(R.id.gamePlayScreen_3_btnChiuThua);
+        tvPlayerName =findViewById(R.id.gamePlayScreen_3_tvPlayerName);
+        tvQuestion=findViewById(R.id.gamePlayScreen_3_tvQuestion);
+        btnComplete =findViewById(R.id.gamePlayScreen_3_btnComplete);
+        btnCoinsident=findViewById(R.id.gamePlayScreen_3_btnCoinsident);
+        btnSurrender=findViewById(R.id.gamePlayScreen_3_btnSurrender);
 
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-        tvTenNguoiChoi.setText(bundle.getString("NguoiChoiDuocChon"));
-        tvNoiDungCauHoi.setText(bundle.getString("CauHoiDuocChon"));
-        tvNoiDungCauHoi.setMovementMethod(new ScrollingMovementMethod());
+        tvPlayerName.setText(bundle.getString("NguoiChoiDuocChon"));
+        tvQuestion.setText(bundle.getString("CauHoiDuocChon"));
+        tvQuestion.setMovementMethod(new ScrollingMovementMethod());
 
-        btnHoanThanh.setOnClickListener(new View.OnClickListener() {
+        btnComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.batDauChoi(bundle.getInt("ViTri"),
+                gamePlayFeatures.startPlaying(bundle.getInt("ViTri"),
                         bundle.getStringArrayList("NguoiChoi"), GamePlayScreen_1.class);
             }
         });
-        btnTrungCauHoi.setOnClickListener(new View.OnClickListener() {
+        btnCoinsident.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        btnChiuThua.setOnClickListener(new View.OnClickListener() {
+        btnSurrender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.thucHienHinhPhat(bundle.getInt("ViTri"),
+                gamePlayFeatures.carryOutAPunishment(bundle.getInt("ViTri"),
                         bundle.getStringArrayList("NguoiChoi"),
                         bundle.getStringArrayList("HinhPhat"));
             }

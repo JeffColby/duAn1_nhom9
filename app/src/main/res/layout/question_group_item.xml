@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_20sdp"
-        android:background="@drawable/bogoc_tongquat">
+        android:background="@drawable/corner_radius_layout">
 
         <TextView
             android:layout_width="match_parent"
@@ -20,8 +20,8 @@
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:textStyle="bold"
-            android:id="@+id/boCauHoi_tvTenBoCauHoi"
-            android:layout_toStartOf="@id/boCauHoi_btnAnHien"
+            android:id="@+id/questionGroup_tvName"
+            android:layout_toStartOf="@id/questionGroup_btnExtend"
             android:layout_marginEnd="@dimen/_25sdp"/>
 
         <ImageView
@@ -29,15 +29,15 @@
             android:layout_height="@dimen/_40sdp"
             android:src="@drawable/triangle_up_svgrepo_com"
             android:layout_alignParentEnd="true"
-            android:id="@+id/boCauHoi_btnAnHien"/>
+            android:id="@+id/questionGroup_btnExtend"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bogoc_chitiet"
+        android:background="@drawable/corner_radius_detail"
         android:visibility="gone"
-        android:id="@+id/boCauHoi_layoutMoRong"
+        android:id="@+id/questionGroup_layoutExtend"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
         android:padding="@dimen/_20sdp">
@@ -53,14 +53,14 @@
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:src="@drawable/pen_solid"
-                android:id="@+id/boCauHoi_btnSua"/>
+                android:id="@+id/questionGroup_btnEdit"/>
 
             <ImageView
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:src="@drawable/trash_solid"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:id="@+id/boCauHoi_btnXoa"/>
+                android:id="@+id/questionGroup_btnDelete"/>
         </LinearLayout>
         
         <LinearLayout
@@ -75,14 +75,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_18ssp"
                 android:text="Số câu hỏi"
-                android:id="@+id/boCauHoi_tvSoCauHoi"
+                android:id="@+id/questionGroup_tvNumQuestions"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15ssp"
-                android:id="@+id/boCauHoi_btnChiTiet"
+                android:id="@+id/questionGroup_btnDetail"
                 android:textColor="@color/hardBlue"
                 android:layout_marginTop="@dimen/_10sdp"/>
         </LinearLayout>

@@ -8,18 +8,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 import fpoly.thanhntph47592.truthordarecustom.R;
-import fpoly.thanhntph47592.truthordarecustom.adapter.LichSuAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.LichSuDAO;
+import fpoly.thanhntph47592.truthordarecustom.adapter.GamePlayDataAdapter;
+import fpoly.thanhntph47592.truthordarecustom.dao.GamePlayDataDAO;
 import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 
 public class HistoryScreen extends AppCompatActivity {
 
-    private static  Context context;
-    private BasicFeatures basicFeatures;
-    private LichSuDAO lichSuDAO;
-    private LichSuAdapter lichSuAdapter;
-    private ImageView btnMenu;
-    private RecyclerView rcLichSu;
+    private static Context context;
+    BasicFeatures basicFeatures;
+    GamePlayDataDAO gamePlayDataDAO;
+    GamePlayDataAdapter gamePlayDataAdapter;
+    ImageView btnMenu;
+    RecyclerView rcHistory;
 
     public static Context getContext() {
         return context;
@@ -32,15 +32,15 @@ public class HistoryScreen extends AppCompatActivity {
         context=this;
 
         basicFeatures=new BasicFeatures(HistoryScreen.this);
-        lichSuDAO =new LichSuDAO(HistoryScreen.this);
-        lichSuAdapter=new LichSuAdapter(HistoryScreen.this, lichSuDAO.toanBoLichSu());
+        gamePlayDataDAO =new GamePlayDataDAO(HistoryScreen.this);
+        gamePlayDataAdapter =new GamePlayDataAdapter(HistoryScreen.this, gamePlayDataDAO.allGamePlay());
 
         btnMenu=findViewById(R.id.historyScreen_btnMenu);
-        rcLichSu=findViewById(R.id.historyScreen_rcLichSu);
+        rcHistory =findViewById(R.id.historyScreen_rcHistory);
 
-        basicFeatures.caiDatRecycleView(rcLichSu);
-        rcLichSu.setAdapter(lichSuAdapter);
-        PopupMenu popupMenu=basicFeatures.caiDatMenu(btnMenu);
+        basicFeatures.recycleViewSetUp(rcHistory);
+        rcHistory.setAdapter(gamePlayDataAdapter);
+        PopupMenu popupMenu=basicFeatures.menuSetUp(btnMenu);
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override

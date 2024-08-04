@@ -17,7 +17,7 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/back_svgrepo_com"
-        android:id="@+id/foundersScreen_btnTroVe"/>
+        android:id="@+id/foundersScreen_btnBack"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15ssp"
-                android:id="@+id/foundersScreen_tvNoiDung"
+                android:id="@+id/foundersScreen_tvContent"
                 android:textColor="@color/hardBlue"
                 android:textStyle="bold"/>
 

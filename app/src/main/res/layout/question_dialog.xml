@@ -13,7 +13,7 @@
         android:textSize="@dimen/_25ssp"
         android:textColor="@color/pink"
         android:textStyle="bold"
-        android:id="@+id/cauHoi_tvTieuDe"
+        android:id="@+id/questionDialog_tvTittle"
         android:textAlignment="center"/>
 
     <EditText
@@ -23,7 +23,7 @@
         android:hint="Nhập nội dung câu hỏi"
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/black"
-        android:id="@+id/cauHoi_edNoiDung"
+        android:id="@+id/questionDialog_edContent"
         android:textColorHint="@color/black"
         android:layout_marginTop="@dimen/_20sdp"/>
 
@@ -38,7 +38,7 @@
             android:text="Chọn phân loại:"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
-            android:id="@+id/cauHoiDialog_tvPhanLoai"
+            android:id="@+id/questionDialog_tvType"
             android:layout_centerVertical="true"
             android:textStyle="bold"/>
 
@@ -46,8 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:id="@+id/cauHoiDialog_spPhanLoai"
-            android:layout_toEndOf="@id/cauHoiDialog_tvPhanLoai"
+            android:id="@+id/questionDialog_spType"
+            android:layout_toEndOf="@id/questionDialog_tvType"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp" />
     </RelativeLayout>
@@ -63,7 +63,7 @@
             android:text="Chọn bộ câu hỏi:"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/black"
-            android:id="@+id/cauHoiDialog_tvBoCauHoi"
+            android:id="@+id/questionDialog_tvQuestionGroup"
             android:layout_centerVertical="true"
             android:textStyle="bold"/>
 
@@ -71,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:id="@+id/cauHoiDialog_spBoCauHoi"
-            android:layout_toEndOf="@id/cauHoiDialog_tvBoCauHoi"
+            android:id="@+id/questionDialog_spQuestionGroup"
+            android:layout_toEndOf="@id/questionDialog_tvQuestionGroup"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp" />
     </RelativeLayout>
@@ -91,7 +91,7 @@
             android:backgroundTint="@color/pink"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
-            android:id="@+id/cauHoi_btnDongY"
+            android:id="@+id/questionDialog_btnAdd"
             android:layout_marginEnd="@dimen/_10sdp"/>
 
         <Button
@@ -101,7 +101,7 @@
             android:backgroundTint="@color/hardBlue"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
-            android:id="@+id/cauHoi_btnTuChoi"
+            android:id="@+id/questionDialog_btnCancel"
             android:layout_marginStart="@dimen/_10sdp"/>
     </LinearLayout>
 
