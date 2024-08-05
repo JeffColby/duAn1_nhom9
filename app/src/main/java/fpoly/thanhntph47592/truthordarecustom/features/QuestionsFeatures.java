@@ -34,6 +34,12 @@ public class QuestionsFeatures {
         questionDAO =new QuestionDAO(context);
     }
 
+    public ArrayList<Question> selectedQuestions(int position){
+        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
+        int questionGroup = questionGroupArrayList.get(position).getId();
+        return questionDAO.filterQuestionByGroup(questionGroup);
+    }
+
     public void questionGroupSpinnerSetUp(Spinner spinner){
         ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
         ArrayList<String> allQuestionGroup =new ArrayList<>();
@@ -54,9 +60,7 @@ public class QuestionsFeatures {
     }
 
     public void filterByGroup(int position, QuestionAdapter questionAdapter, RecyclerView recyclerView){
-        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
-        int maBoCauHoi= questionGroupArrayList.get(position).getId();
-        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(maBoCauHoi);
+        ArrayList<Question> questionArrayList = selectedQuestions(position);
 
         questionAdapter.setArrayList(questionArrayList);
         recyclerView.setAdapter(questionAdapter);
@@ -107,23 +111,21 @@ public class QuestionsFeatures {
         });
     }
 
-    public void filterByType(int position, int type, ArrayList<Question> arrayList,
+    public void filterByType(int position, int type, ArrayList<Question> checkQuestionArrayList,
                                       QuestionAdapter adapter, RecyclerView recyclerView){
-        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
-        int maBoCauHoi= questionGroupArrayList.get(position).getId();
-        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(maBoCauHoi);
+        ArrayList<Question> fixedQuestionArrayList = selectedQuestions(position);
 
-        if (arrayList.size() == questionArrayList.size()){
-            ArrayList<Question> arrayList1=new ArrayList<>();
-            for (Question question : questionArrayList){
+        if (checkQuestionArrayList.size() == fixedQuestionArrayList.size()){
+            ArrayList<Question> newQuestionArrayList =new ArrayList<>();
+            for (Question question : fixedQuestionArrayList){
                 if (type == question.getType()){
-                    arrayList1.add(question);
+                    newQuestionArrayList.add(question);
                 }
             }
-            adapter.setArrayList(arrayList1);
+            adapter.setArrayList(newQuestionArrayList);
             recyclerView.setAdapter(adapter);
         }else {
-            adapter.setArrayList(questionArrayList);
+            adapter.setArrayList(fixedQuestionArrayList);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -211,9 +213,7 @@ public class QuestionsFeatures {
     }
 
     public void checkQuestionQuantity(int position){
-        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
-        int maBoCauHoi= questionGroupArrayList.get(position).getId();
-        ArrayList<Question> questionArrayList = questionDAO.filterQuestionByGroup(maBoCauHoi);
+        ArrayList<Question> questionArrayList =selectedQuestions(position);
 
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         if (questionArrayList.isEmpty()){
@@ -236,5 +236,4 @@ public class QuestionsFeatures {
             new GamePlayFeatures(context).startPlaying(position,null, SetupScreen_2.class);
         }
     }
-
 }

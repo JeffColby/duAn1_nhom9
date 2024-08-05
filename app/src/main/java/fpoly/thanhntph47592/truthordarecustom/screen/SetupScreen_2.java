@@ -45,6 +45,7 @@ public class SetupScreen_2 extends AppCompatActivity {
         adapter=new PlayerAdapter(SetupScreen_2.this,arrayList);
         rcPlayer.setAdapter(adapter);
         basicFeatures.recycleViewSetUp(rcPlayer);
+
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         int position =bundle.getInt("ViTri");

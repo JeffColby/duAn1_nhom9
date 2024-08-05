@@ -63,21 +63,21 @@ public class GamePlayDataDAO {
     public String allQuestions(ArrayList<Question> question){
         ArrayList<String> truthArrayList =new ArrayList<>();
         ArrayList<String> dareArrayList =new ArrayList<>();
-        ArrayList<String> punishArrayList =new ArrayList<>();
+        ArrayList<String> punishmentArrayList =new ArrayList<>();
         for (Question question1 : question){
             if (question1.getType()==0){
                 truthArrayList.add(question1.getContent());
             } else if (question1.getType()==1) {
                 dareArrayList.add(question1.getContent());
             }else {
-                punishArrayList.add(question1.getContent());
+                punishmentArrayList.add(question1.getContent());
             }
         }
 
         String truthQuestion = stringConcat("Sự thật: \n", truthArrayList);
         String dareQuestion = stringConcat("Thách thức: \n", dareArrayList);
-        String punish = stringConcat("Hình phạt: \n", punishArrayList);
+        String punishment = stringConcat("Hình phạt: \n", punishmentArrayList);
 
-        return (truthQuestion +"\n"+ dareQuestion +"\n"+ punish);
+        return (truthQuestion +"\n"+ dareQuestion +"\n"+ punishment);
     }
 }

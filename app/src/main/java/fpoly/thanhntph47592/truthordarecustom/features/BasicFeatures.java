@@ -101,13 +101,13 @@ public class BasicFeatures {
         context.startActivity(intent);
     }
 
-    public void hideAndShow(ImageView btnHideAndShow, RelativeLayout extendLayout){
-        if (extendLayout.getVisibility()== View.GONE){
-            btnHideAndShow.setImageResource(R.drawable.triangle_down_svgrepo_com);
-            extendLayout.setVisibility(View.VISIBLE);
+    public void extendLayout(ImageView btnExtend, RelativeLayout layoutExtend){
+        if (layoutExtend.getVisibility()== View.GONE){
+            btnExtend.setImageResource(R.drawable.triangle_down_svgrepo_com);
+            layoutExtend.setVisibility(View.VISIBLE);
         }else {
-            btnHideAndShow.setImageResource(R.drawable.triangle_up_svgrepo_com);
-            extendLayout.setVisibility(View.GONE);
+            btnExtend.setImageResource(R.drawable.triangle_up_svgrepo_com);
+            layoutExtend.setVisibility(View.GONE);
         }
     }
 

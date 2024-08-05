@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
+    
     public DBHelper(@Nullable Context context) {
         super(context, "TRUTHORDARE.DB", null, 1);
     }

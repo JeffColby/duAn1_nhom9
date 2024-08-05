@@ -40,6 +40,7 @@ public class HistoryFeatures {
         String day= localDateTime.getDayOfMonth()+"/";
         String month= localDateTime.getMonthValue()+"/";
         String year= localDateTime.getYear()+"";
+
         String time =hour+minutes+day+month+year;
 
         ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();

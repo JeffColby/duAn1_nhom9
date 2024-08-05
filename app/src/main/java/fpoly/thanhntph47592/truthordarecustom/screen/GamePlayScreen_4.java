@@ -30,7 +30,7 @@ public class GamePlayScreen_4 extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
         ArrayList<String> punishments =bundle.getStringArrayList("HinhPhat");
 
-        gamePlayFeatures.punishSpinnerSetUp(spPunishment, punishments);
+        gamePlayFeatures.punishmentSpinnerSetUp(spPunishment, punishments);
 
         btnComplete.setOnClickListener(new View.OnClickListener() {
             @Override

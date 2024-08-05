@@ -10,6 +10,7 @@ import fpoly.thanhntph47592.truthordarecustom.features.BasicFeatures;
 
 public class FoundersScreen extends AppCompatActivity {
 
+    private BasicFeatures basicFeatures;
     ImageView btnBack;
     TextView tvContent, btnFacebook;
 
@@ -17,10 +18,12 @@ public class FoundersScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_founders_screen);
+
+        basicFeatures=new BasicFeatures(FoundersScreen.this);
+
         btnBack=findViewById(R.id.foundersScreen_btnBack);
         tvContent=findViewById(R.id.foundersScreen_tvContent);
         btnFacebook=findViewById(R.id.foundersScreen_btnFacebook);
-        BasicFeatures basicFeatures=new BasicFeatures(FoundersScreen.this);
 
         String content ="Ứng dụng được phát triển bởi Nguyễn Trung Thành - " +
                 "sinh viên chuyên ngành lập trình Mobile tại trường Cao đẳng FPT Polytechnic.";

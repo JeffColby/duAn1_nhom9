@@ -19,7 +19,9 @@ public class AttentionScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attention_screen);
+
         basicFeatures=new BasicFeatures(AttentionScreen.this);
+
         tvAttention =findViewById(R.id.attentionScreen_tvAttention);
         btnGotIt =findViewById(R.id.attentionScreen_btnGotIt);
 

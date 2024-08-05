@@ -42,9 +42,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.NguoiChoiH
 
     @Override
     public void onBindViewHolder(@NonNull NguoiChoiHolder holder, int position) {
-        String tenNguoiChoi=arrayList.get(position);
+        String playerName =arrayList.get(position);
 
-        holder.tvPlayerName.setText(tenNguoiChoi);
+        holder.tvPlayerName.setText(playerName);
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +54,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.NguoiChoiH
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.changePlayer(holder.getAdapterPosition(),tenNguoiChoi,arrayList,
+                gamePlayFeatures.changePlayer(holder.getAdapterPosition(), playerName,arrayList,
                         PlayerAdapter.this);
             }
         });

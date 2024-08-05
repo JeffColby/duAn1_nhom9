@@ -12,11 +12,13 @@ import java.util.ArrayList;
 import java.util.Random;
 import fpoly.thanhntph47592.truthordarecustom.R;
 import fpoly.thanhntph47592.truthordarecustom.features.GamePlayFeatures;
+import fpoly.thanhntph47592.truthordarecustom.features.QuestionsFeatures;
 import fpoly.thanhntph47592.truthordarecustom.model.Question;
 
 public class GamePlayScreen_2 extends AppCompatActivity {
 
     private GamePlayFeatures gamePlayFeatures;
+    private QuestionsFeatures questionsFeatures;
     TextView tvPlayerName;
     ImageView btnExit;
     Button btnTruth,btnDare;
@@ -27,6 +29,7 @@ public class GamePlayScreen_2 extends AppCompatActivity {
         setContentView(R.layout.activity_game_play_screen2);
 
         gamePlayFeatures=new GamePlayFeatures(GamePlayScreen_2.this);
+        questionsFeatures=new QuestionsFeatures(GamePlayScreen_2.this);
 
         tvPlayerName =findViewById(R.id.gamePlayScreen_2_tvPlayerName);
         btnExit=findViewById(R.id.gamePlayScreen_2_btnExit);
@@ -38,10 +41,10 @@ public class GamePlayScreen_2 extends AppCompatActivity {
         int position =bundle.getInt("ViTri");
         ArrayList<String> player =bundle.getStringArrayList("NguoiChoi");
 
-        ArrayList<Question> questionArrayList =gamePlayFeatures.selectedQuestions(position);
+        ArrayList<Question> questionArrayList =questionsFeatures.selectedQuestions(position);
         ArrayList<String> truthQuestions =gamePlayFeatures.allTruthQuestions(questionArrayList, btnTruth);
-        ArrayList<String> dareQuestionsare =gamePlayFeatures.allDareQuestions(questionArrayList,btnDare);
-        ArrayList<String> punishes =gamePlayFeatures.allPunishes(questionArrayList);
+        ArrayList<String> dareQuestions =gamePlayFeatures.allDareQuestions(questionArrayList,btnDare);
+        ArrayList<String> punishments =gamePlayFeatures.allPunishments(questionArrayList);
 
         int randomPlayer = new Random().nextInt(player.size());
         String playerName = player.get(randomPlayer);
@@ -57,13 +60,13 @@ public class GamePlayScreen_2 extends AppCompatActivity {
         btnTruth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.randomQuestion(truthQuestions, playerName, position, player, punishes);
+                gamePlayFeatures.randomQuestion(truthQuestions, playerName, position, player, punishments);
             }
         });
         btnDare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gamePlayFeatures.randomQuestion(dareQuestionsare, playerName, position, player, punishes);
+                gamePlayFeatures.randomQuestion(dareQuestions, playerName, position, player, punishments);
             }
         });
     }

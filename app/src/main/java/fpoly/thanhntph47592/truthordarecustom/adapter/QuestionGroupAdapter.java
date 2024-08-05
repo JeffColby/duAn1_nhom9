@@ -98,13 +98,13 @@ public class QuestionGroupAdapter extends RecyclerView.Adapter<QuestionGroupAdap
             btnExtend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    basicFeatures.hideAndShow(btnExtend, layoutExtend);
+                    basicFeatures.extendLayout(btnExtend, layoutExtend);
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    basicFeatures.hideAndShow(btnExtend, layoutExtend);
+                    basicFeatures.extendLayout(btnExtend, layoutExtend);
                 }
             });
 

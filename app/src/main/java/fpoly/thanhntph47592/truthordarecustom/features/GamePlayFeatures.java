@@ -18,9 +18,6 @@ import java.util.Random;
 import fpoly.thanhntph47592.truthordarecustom.R;
 import fpoly.thanhntph47592.truthordarecustom.adapter.PlayerAdapter;
 import fpoly.thanhntph47592.truthordarecustom.adapter.SpinnerAdapter;
-import fpoly.thanhntph47592.truthordarecustom.dao.QuestionGroupDAO;
-import fpoly.thanhntph47592.truthordarecustom.dao.QuestionDAO;
-import fpoly.thanhntph47592.truthordarecustom.model.QuestionGroup;
 import fpoly.thanhntph47592.truthordarecustom.model.Question;
 import fpoly.thanhntph47592.truthordarecustom.screen.GamePlayScreen_3;
 import fpoly.thanhntph47592.truthordarecustom.screen.GamePlayScreen_4;
@@ -29,13 +26,9 @@ import fpoly.thanhntph47592.truthordarecustom.screen.HomeScreen;
 public class GamePlayFeatures {
 
     private Context context;
-    private QuestionGroupDAO questionGroupDAO;
-    private QuestionDAO questionDAO;
 
     public GamePlayFeatures(Context context) {
         this.context = context;
-        questionGroupDAO =new QuestionGroupDAO(context);
-        questionDAO =new QuestionDAO(context);
     }
 
     public void addPlayer(EditText edPlayerName, ArrayList<String> arrayList, PlayerAdapter adapter){
@@ -44,9 +37,9 @@ public class GamePlayFeatures {
             Toast.makeText(context, "Người chơi không hợp lệ", Toast.LENGTH_SHORT).show();
         }else {
             String existedPlayer ="";
-            for (String ten:arrayList){
-                if (ten.equals(playerName)){
-                    existedPlayer =ten;
+            for (String name :arrayList){
+                if (name.equals(playerName)){
+                    existedPlayer = name;
                     break;
                 }
             }
@@ -111,9 +104,9 @@ public class GamePlayFeatures {
                     Toast.makeText(context, "Người chơi không hợp lệ", Toast.LENGTH_SHORT).show();
                 }else {
                     String existedPlayer ="";
-                    for (String ten:arrayList){
-                        if (ten.equals(newPlayerName)){
-                            existedPlayer =ten;
+                    for (String name :arrayList){
+                        if (name.equals(newPlayerName)){
+                            existedPlayer = name;
                             break;
                         }
                     }
@@ -163,12 +156,6 @@ public class GamePlayFeatures {
         }
     }
 
-    public ArrayList<Question> selectedQuestions(int position){
-        ArrayList<QuestionGroup> questionGroupArrayList = questionGroupDAO.allQuestionGroup();
-        int questionGroup = questionGroupArrayList.get(position).getId();
-        return questionDAO.filterQuestionByGroup(questionGroup);
-    }
-
     public ArrayList<String> allTruthQuestions(ArrayList<Question> questionArrayList, Button button){
         ArrayList<String> truthArrayList =new ArrayList<>();
         for (Question question : questionArrayList){
@@ -195,39 +182,39 @@ public class GamePlayFeatures {
         return dareArrayList;
     }
 
-    public ArrayList<String> allPunishes(ArrayList<Question> questionArrayList){
-        ArrayList<String> punishArrayList =new ArrayList<>();
+    public ArrayList<String> allPunishments(ArrayList<Question> questionArrayList){
+        ArrayList<String> punishmentArrayList =new ArrayList<>();
         for (Question question : questionArrayList){
             if (question.getType()==2){
-                punishArrayList.add(question.getContent());
+                punishmentArrayList.add(question.getContent());
             }
         }
-        return punishArrayList;
+        return punishmentArrayList;
     }
 
     public void randomQuestion(ArrayList<String> questionArrayList, String playerName,
-                               int position, ArrayList<String> players, ArrayList<String> punishes){
-        int viTriCauHoi = new Random().nextInt(questionArrayList.size());
+                               int position, ArrayList<String> players, ArrayList<String> punishment){
+        int questionPosition = new Random().nextInt(questionArrayList.size());
         Intent intent=new Intent(context, GamePlayScreen_3.class);
         Bundle bundle=new Bundle();
         bundle.putInt("ViTri", position);
         bundle.putStringArrayList("NguoiChoi",players);
         bundle.putString("NguoiChoiDuocChon", playerName);
-        bundle.putString("CauHoiDuocChon", questionArrayList.get(viTriCauHoi));
-        bundle.putStringArrayList("HinhPhat", punishes);
+        bundle.putString("CauHoiDuocChon", questionArrayList.get(questionPosition));
+        bundle.putStringArrayList("HinhPhat", punishment);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
-    public void punishSpinnerSetUp(Spinner spinner, ArrayList<String> arrayList){
+    public void punishmentSpinnerSetUp(Spinner spinner, ArrayList<String> arrayList){
         SpinnerAdapter adapter=new SpinnerAdapter(context,arrayList);
         spinner.setAdapter(adapter);
     }
 
-    public void carryOutAPunishment(int position, ArrayList<String> players, ArrayList<String> punishes){
+    public void carryOutAPunishment(int position, ArrayList<String> players, ArrayList<String> punishment){
         Intent intent=new Intent(context, GamePlayScreen_4.class);
         Bundle bundle=new Bundle();
-        bundle.putStringArrayList("HinhPhat", punishes);
+        bundle.putStringArrayList("HinhPhat", punishment);
         bundle.putInt("ViTri", position);
         bundle.putStringArrayList("NguoiChoi", players);
         intent.putExtras(bundle);

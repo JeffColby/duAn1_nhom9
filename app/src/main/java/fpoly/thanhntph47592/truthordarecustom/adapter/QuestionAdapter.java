@@ -93,13 +93,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.CauHoi
             btnExtend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    basicFeatures.hideAndShow(btnExtend,layoutExtend);
+                    basicFeatures.extendLayout(btnExtend,layoutExtend);
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    basicFeatures.hideAndShow(btnExtend,layoutExtend);
+                    basicFeatures.extendLayout(btnExtend,layoutExtend);
                 }
             });
         }
